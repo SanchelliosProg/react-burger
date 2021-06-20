@@ -1,0 +1,17 @@
+main {
+  display: grid;
+  grid-template-columns: auto 575px 40px 575px auto;
+  grid-template-rows: 1fr;
+}
+
+.ingredients {
+  display: grid;
+  grid-column-start: 2;
+  background-color: blue;
+}
+
+.constructor {
+  display: grid;
+  grid-column-start: 4;
+  background-color: blueviolet;
+}

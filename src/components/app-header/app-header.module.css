@@ -16,6 +16,7 @@ header {
 
 .profile {
   grid-column-start: 4;
+  justify-self: end;
 }
 
 .item {
