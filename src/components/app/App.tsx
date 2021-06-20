@@ -224,7 +224,7 @@ function App() {
     <>
       <AppHeader />
       <main>
-        <div className={style.ingredients}>ingredients</div>
+        <div className={`${style.ingredients}`}>ingredients</div>
         <div className={`${style.constructor}`}>ingredients</div>
       </main>
     </>
