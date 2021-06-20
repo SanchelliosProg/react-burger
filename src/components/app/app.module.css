@@ -7,7 +7,6 @@ main {
 .ingredients {
   display: grid;
   grid-column-start: 2;
-  background-color: blue;
 }
 
 .constructor {
