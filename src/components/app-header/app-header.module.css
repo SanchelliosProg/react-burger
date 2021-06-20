@@ -1,0 +1,35 @@
+header {
+  display: grid;
+  grid-template-columns: 1fr 2fr 2fr 2fr 1fr;
+  align-items: center;
+  justify-items: center;
+}
+
+.menus {
+  grid-column-start: 2;
+}
+
+.logo {
+  grid-column-start: 3;
+  
+}
+
+.profile {
+  grid-column-start: 4;
+}
+
+.item {
+  display: flex;
+  justify-items: center;
+  align-items: center;
+  flex-direction: row;
+  cursor: pointer;
+}
+
+.group {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+}
+
+
