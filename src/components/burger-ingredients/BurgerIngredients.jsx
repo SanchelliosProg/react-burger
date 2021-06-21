@@ -1,7 +1,7 @@
 import React from "react";
 import style from "./burger-ingredients.module.css";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
-import BurgerItem from "../burger-item/BurgerItem";
+import IngredientsSection from "../ingredients-section/IngredientsSection";
 
 const BUNS = "bun";
 const SAUCE = "sauce";
@@ -43,6 +43,7 @@ class BurgerIngredients extends React.Component {
           >
             Булки
           </Tab>
+
           <Tab
             value={SAUCE}
             active={this.state.currentTab === SAUCE}
@@ -50,6 +51,7 @@ class BurgerIngredients extends React.Component {
           >
             Соусы
           </Tab>
+
           <Tab
             value={MAIN}
             active={this.state.currentTab === MAIN}
@@ -58,47 +60,10 @@ class BurgerIngredients extends React.Component {
             Начинки
           </Tab>
         </div>
-        <div>
-          <h2 className="text text_type_main-medium pb-6">Булки</h2>
-          <div className={`${style.container} pb-10 pl-4 pt-6`}>
-            {this.getBunsFormData().map((item, index) => {
-              return (
-                <BurgerItem
-                  item={item}
-                  key={item._id}
-                  rightPadding={(index + 1) % 2 === 0 ? undefined : "pr-6"}
-                />
-              );
-            })}
-          </div>
-        </div>
-        <div>
-          <h2 className="text text_type_main-medium pb-6">Соусы</h2>
-          <div className={`${style.container} pb-10`}>
-            {this.getSaucesFromData().map((item, index) => {
-              return (
-                <BurgerItem
-                  item={item}
-                  key={item._id}
-                  rightPadding={(index + 1) % 2 === 0 ? undefined : "pr-6"}
-                />
-              );
-            })}
-          </div>
-        </div>
-        <div>
-          <h2 className="text text_type_main-medium pb-6">Начинки</h2>
-          <div className={`${style.container} pb-10`}>
-            {this.getMainFromData().map((item, index) => {
-              return (
-                <BurgerItem
-                  item={item}
-                  key={item._id}
-                  rightPadding={(index + 1) % 2 === 0 ? undefined : "pr-6"}
-                />
-              );
-            })}
-          </div>
+        <div className={style.items}>
+          <IngredientsSection items={this.getBunsFormData()} id={BUNS} />
+          <IngredientsSection items={this.getSaucesFromData()} id={SAUCE} />
+          <IngredientsSection items={this.getMainFromData()} id={MAIN} />
         </div>
       </>
     );
