@@ -1,6 +1,7 @@
 import React from "react";
 import AppHeader from "../app-header/AppHeader";
 import BurgerIngredients from "../burger-ingredients/BurgerIngredients";
+import BurgerConstructor from "../burger-constructor/burger-constructor";
 import style from "./app.module.css";
 
 const data = [
@@ -227,15 +228,17 @@ class App extends React.Component {
   
   render() {
     return (
-      <>
+      <body>
         <AppHeader />
         <main>
           <div className={`${style.ingredients}`}>
             <BurgerIngredients data={data}/>
           </div>
-          <div className={`${style.constructor}`}>ingredients</div>
+          <div className={`${style.constructor}`}>
+            <BurgerConstructor/>
+          </div>
         </main>
-      </>
+      </body>
     );
   }
   

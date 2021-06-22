@@ -1,0 +1,12 @@
+.total {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+
+.price {
+  display: flex;
+  align-items: center;
+}

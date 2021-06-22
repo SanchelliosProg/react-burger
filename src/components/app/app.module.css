@@ -12,5 +12,4 @@ main {
 .constructor {
   display: grid;
   grid-column-start: 4;
-  background-color: blueviolet;
 }
