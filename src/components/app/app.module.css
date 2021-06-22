@@ -1,7 +1,6 @@
 main {
   display: grid;
   grid-template-columns: auto 575px 40px 575px auto;
-  grid-template-rows: 1fr;
 }
 
 .ingredients {

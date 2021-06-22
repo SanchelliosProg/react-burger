@@ -60,11 +60,11 @@ class BurgerIngredients extends React.Component {
             Начинки
           </Tab>
         </div>
-        <body className={style.items}>
+        <div className={style.items}>
           <IngredientsSection items={this.getBunsFormData()} id={BUNS} />
           <IngredientsSection items={this.getSaucesFromData()} id={SAUCE} />
           <IngredientsSection items={this.getMainFromData()} id={MAIN} />
-        </body>
+        </div>
       </>
     );
   }

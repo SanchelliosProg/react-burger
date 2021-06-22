@@ -32,35 +32,41 @@ class BurgerConstructor extends React.Component {
     const bun = this.getTheBun();
     return (
       <>
-        <div className="pt-25 pr-4 pb-10 pl-4">
-          {this.isBunSelected() && (
-            <BurgerConstructorItem
-              type="top"
-              isLocked={true}
-              text={bun.name}
-              price={bun.price}
-              thumbnail={bun.image}
-            />
-          )}
-          {this.getIngredients().map((item, index) => {
-            return (
+        <div className={style.items}>
+          <div className="pt-25 pr-4 pb-10 pl-4">
+            {this.isBunSelected() && (
               <BurgerConstructorItem
-                text={item.name}
-                price={item.price}
-                thumbnail={item.image}
+                id="top"
+                type="top"
+                isLocked={true}
+                text={bun.name}
+                price={bun.price}
+                thumbnail={bun.image}
               />
-            );
-          })}
-          {this.isBunSelected() && (
-            <BurgerConstructorItem
-              type="bottom"
-              isLocked={true}
-              text={bun.name}
-              price={bun.price}
-              thumbnail={bun.image}
-            />
-          )}
+            )}
+            {this.getIngredients().map((item, index) => {
+              return (
+                <BurgerConstructorItem
+                  id={`${item._id}${index}`}
+                  text={item.name}
+                  price={item.price}
+                  thumbnail={item.image}
+                />
+              );
+            })}
+            {this.isBunSelected() && (
+              <BurgerConstructorItem
+                id="bottom"
+                type="bottom"
+                isLocked={true}
+                text={bun.name}
+                price={bun.price}
+                thumbnail={bun.image}
+              />
+            )}
+          </div>
         </div>
+
         <div className={`${style.total} pr-4`}>
           <div className={`${style.price} mr-10`}>
             <span className="text text_type_digits-medium pr-1">
