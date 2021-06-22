@@ -13,4 +13,9 @@
 
 .items {
   overflow-y: auto;
+  height: 70vh;
+}
+
+.topSpace {
+  height: 100px;
 }

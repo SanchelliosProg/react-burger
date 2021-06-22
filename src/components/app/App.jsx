@@ -1,6 +1,6 @@
 import React from "react";
-import AppHeader from "../app-header/AppHeader";
-import BurgerIngredients from "../burger-ingredients/BurgerIngredients";
+import AppHeader from "../app-header/app-header";
+import BurgerIngredients from "../burger-ingredients/burger-ingredients";
 import BurgerConstructor from "../burger-constructor/burger-constructor";
 import style from "./app.module.css";
 
@@ -234,7 +234,7 @@ class App extends React.Component {
           <div className={`${style.ingredients}`}>
             <BurgerIngredients data={data}/>
           </div>
-          <div className={`${style.constructor}`}>
+          <div className={`${style.constructor} mr-10`}>
             <BurgerConstructor/>
           </div>
         </main>

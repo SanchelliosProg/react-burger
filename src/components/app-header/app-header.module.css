@@ -1,6 +1,7 @@
 header {
   display: grid;
-  grid-template-columns: 1fr 2fr 2fr 2fr 1fr;
+  /* grid-template-columns: 1fr 2fr 2fr 2fr 1fr; */
+  grid-template-columns: 12% 28% 20% 21% 19%;
   align-items: center;
   justify-items: center;
 }
@@ -10,8 +11,8 @@ header {
 }
 
 .logo {
-  grid-column-start: 3;
-  
+  position: absolute;
+  /* grid-column-start: 3; */
 }
 
 .profile {

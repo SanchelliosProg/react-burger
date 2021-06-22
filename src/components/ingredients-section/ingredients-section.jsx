@@ -1,4 +1,4 @@
-import BurgerItem from "../burger-item/BurgerItem";
+import BurgerItem from "../burger-item/burger-item";
 import style from "./ingredients-section.module.css";
 
 const IngredientsSection = (props) => {

@@ -33,7 +33,8 @@ class BurgerConstructor extends React.Component {
     return (
       <>
         <div className={style.items}>
-          <div className="pt-25 pr-4 pb-10 pl-4">
+          <div className={style.topSpace}/>
+          <div className="pr-4 pb-10 pl-4">
             {this.isBunSelected() && (
               <BurgerConstructorItem
                 key="top"
@@ -67,7 +68,7 @@ class BurgerConstructor extends React.Component {
           </div>
         </div>
 
-        <div className={`${style.total} pr-4`}>
+        <div className={`${style.total} pt-10 pb-10 pr-4`}>
           <div className={`${style.price} mr-10`}>
             <span className="text text_type_digits-medium pr-1">
               {this.getTotalPrice()}
@@ -141,6 +142,22 @@ const data = [
     image: "https://code.s3.yandex.net/react/code/sp_1.png",
     image_mobile: "https://code.s3.yandex.net/react/code/sp_1-mobile.png",
     image_large: "https://code.s3.yandex.net/react/code/sp_1-large.png",
+    __v: 0,
+  },
+  {
+    _id: "60666c42cc7b410027a1a9bb",
+    name: "Хрустящие минеральные кольца",
+    type: "main",
+    proteins: 808,
+    fat: 689,
+    carbohydrates: 609,
+    calories: 986,
+    price: 300,
+    image: "https://code.s3.yandex.net/react/code/mineral_rings.png",
+    image_mobile:
+      "https://code.s3.yandex.net/react/code/mineral_rings-mobile.png",
+    image_large:
+      "https://code.s3.yandex.net/react/code/mineral_rings-large.png",
     __v: 0,
   },
   {

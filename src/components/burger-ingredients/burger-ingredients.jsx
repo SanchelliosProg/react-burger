@@ -1,7 +1,7 @@
 import React from "react";
 import style from "./burger-ingredients.module.css";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
-import IngredientsSection from "../ingredients-section/IngredientsSection";
+import IngredientsSection from "../ingredients-section/ingredients-section";
 
 const BUNS = "bun";
 const SAUCE = "sauce";
@@ -32,7 +32,7 @@ class BurgerIngredients extends React.Component {
   render() {
     return (
       <>
-        <h1 className="text text_type_main-large  pt-10 pb-5">
+        <h1 className={`text text_type_main-large  pt-10 pb-5`}>
           Соберите бургер
         </h1>
         <div className={`${style.tabs} pb-10`}>
