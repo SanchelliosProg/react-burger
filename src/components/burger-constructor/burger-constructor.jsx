@@ -36,7 +36,7 @@ class BurgerConstructor extends React.Component {
           <div className="pt-25 pr-4 pb-10 pl-4">
             {this.isBunSelected() && (
               <BurgerConstructorItem
-                id="top"
+                key="top"
                 type="top"
                 isLocked={true}
                 text={bun.name}
@@ -47,7 +47,7 @@ class BurgerConstructor extends React.Component {
             {this.getIngredients().map((item, index) => {
               return (
                 <BurgerConstructorItem
-                  id={`${item._id}${index}`}
+                  key={`${item._id}${index}`}
                   text={item.name}
                   price={item.price}
                   thumbnail={item.image}
@@ -56,7 +56,7 @@ class BurgerConstructor extends React.Component {
             })}
             {this.isBunSelected() && (
               <BurgerConstructorItem
-                id="bottom"
+                key="bottom"
                 type="bottom"
                 isLocked={true}
                 text={bun.name}

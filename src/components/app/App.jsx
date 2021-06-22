@@ -228,7 +228,7 @@ class App extends React.Component {
   
   render() {
     return (
-      <body>
+      <>
         <AppHeader />
         <main>
           <div className={`${style.ingredients}`}>
@@ -238,7 +238,7 @@ class App extends React.Component {
             <BurgerConstructor/>
           </div>
         </main>
-      </body>
+      </>
     );
   }
   
