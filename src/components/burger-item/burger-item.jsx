@@ -1,10 +1,9 @@
 import { CurrencyIcon, Counter } from "@ya.praktikum/react-developer-burger-ui-components";
 import style from "./burger-item.module.css";
+import PropTypes from 'prop-types';
 
 const BurgerItem = (props) => {
-  // TODO: implement later, when state menegement will be ready
-  // const counter = props.item.__v;
-  const counter = 1; // just for UI demonstration
+  const counter = props.chosen.filter(choice => (choice.name === props.item.name)).length;
   return (
     <div className={`${style.container} ${props.rightPadding}`}>
       {counter > 0 ? <Counter count={counter} size="default"/> : undefined}
@@ -17,5 +16,12 @@ const BurgerItem = (props) => {
     </div>
   );
 };
+
+BurgerItem.propTypes = {
+  chosen: PropTypes.arrayOf(PropTypes.object),
+  item: PropTypes.object,
+  key: PropTypes.string,
+  rightPadding: PropTypes.string
+}
 
 export default BurgerItem;

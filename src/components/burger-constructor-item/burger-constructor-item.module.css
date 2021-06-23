@@ -10,6 +10,6 @@
 }
 
 .info {
+  align-self: stretch;
   grid-column-start: 2;
-  justify-items: end;
 }

@@ -2,6 +2,7 @@ import React from "react";
 import style from "./burger-ingredients.module.css";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import IngredientsSection from "../ingredients-section/ingredients-section";
+import PropTypes from 'prop-types';
 
 const BUNS = "bun";
 const SAUCE = "sauce";
@@ -28,6 +29,10 @@ class BurgerIngredients extends React.Component {
   getMainFromData = () => {
     return this.props.data.filter((item) => item.type === MAIN);
   };
+
+  countIngredient = (type) => {
+
+  }
 
   render() {
     return (
@@ -68,6 +73,10 @@ class BurgerIngredients extends React.Component {
       </>
     );
   }
+}
+
+BurgerIngredients.propTypes = {
+  data: PropTypes.arrayOf(PropTypes.object)
 }
 
 export default BurgerIngredients;

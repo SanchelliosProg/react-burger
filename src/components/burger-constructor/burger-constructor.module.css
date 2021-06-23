@@ -5,6 +5,9 @@
   justify-content: flex-end;
 }
 
+.container {
+  height: 70vh;
+}
 
 .price {
   display: flex;
@@ -13,9 +16,5 @@
 
 .items {
   overflow-y: auto;
-  height: 70vh;
-}
-
-.topSpace {
-  height: 100px;
+  height: 40vh;
 }

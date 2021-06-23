@@ -4,6 +4,7 @@ import BurgerIngredients from "../burger-ingredients/burger-ingredients";
 import BurgerConstructor from "../burger-constructor/burger-constructor";
 import style from "./app.module.css";
 import data from "../../utils/data.js";
+import chosen from "../../utils/chosen.js";
 
 class App extends React.Component {
 
@@ -18,10 +19,10 @@ class App extends React.Component {
         <AppHeader />
         <main>
           <section className={`${style.ingredients}`}>
-            <BurgerIngredients data={data}/>
+            <BurgerIngredients data={this.state.data}/>
           </section>
-          <section className={`${style.constructor} mr-10`}>
-            <BurgerConstructor/>
+          <section className={`pr-10`}>
+            <BurgerConstructor chosen={chosen}/>
           </section>
         </main>
       </>

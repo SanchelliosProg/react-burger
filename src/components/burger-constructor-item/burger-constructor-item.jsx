@@ -6,7 +6,7 @@ import style from "./burger-constructor-item.module.css";
 
 const BurgerConstructorItem = (props) => {
   return (
-    <div className={`${style.item} mt-4 mb-4`}>
+    <div className={`${style.item} mt-4 mb-4 ${props.isLocked ? "mr-5" : "mr-2"}`}>
       <div className="drag">
         {!props.isLocked && <DragIcon type="primary" />}
       </div>
