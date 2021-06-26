@@ -7,7 +7,7 @@ const IngredientsSection = (props) => {
   return (
     <>
       <h2 id={props.id} className="text text_type_main-medium pb-6">
-        Булки
+        {props.title}
       </h2>
       <div className={`${style.container} pb-10 pl-4 pt-6`}>
         {props.items.map((item, index) => {

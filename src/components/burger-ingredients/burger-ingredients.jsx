@@ -66,9 +66,9 @@ class BurgerIngredients extends React.Component {
           </Tab>
         </div>
         <div className={style.items}>
-          <IngredientsSection items={this.getBunsFormData()} id={BUNS} />
-          <IngredientsSection items={this.getSaucesFromData()} id={SAUCE} />
-          <IngredientsSection items={this.getMainFromData()} id={MAIN} />
+          <IngredientsSection items={this.getBunsFormData()} id={BUNS} title="Булки"/>
+          <IngredientsSection items={this.getSaucesFromData()} id={SAUCE} title="Соусы"/>
+          <IngredientsSection items={this.getMainFromData()} id={MAIN} title="Начинка"/>
         </div>
       </>
     );
