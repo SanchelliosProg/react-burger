@@ -15,53 +15,88 @@ const CONSTRUCTOR_SELECTED = "constructor";
 const ORDERS_SELECTED = "orders";
 const PROFILE_SELECTED = "profile";
 
-class AppHeader extends React.Component {
-  
-  constructor(props) {
-    super(props);
-    this.state = {selectedPage: CONSTRUCTOR_SELECTED};
-  }
+const AppHeader = () => {
+  const [selectedPage, setPage] = React.useState(CONSTRUCTOR_SELECTED);
 
-  selectConstructor = () => {
-    this.setState({selectedPage: CONSTRUCTOR_SELECTED});
-  }
+  const selectConstructor = () => {
+    setPage(CONSTRUCTOR_SELECTED);
+  };
 
-  selectOrders = () => {
-    this.setState({selectedPage: ORDERS_SELECTED});
-  }
+  const selectOrders = () => {
+    setPage(ORDERS_SELECTED);
+  };
 
-  selectProfile = () => {
-    this.setState({selectedPage: PROFILE_SELECTED});
-  }
+  const selectProfile = () => {
+    setPage(PROFILE_SELECTED);
+  };
 
-  render () {
-    return (
-      <header className={`pt-4 pb-4`}>
-        <div className={style.menus}>
-          <div className={style.group}>
-            <div className={itemStyle} onClick={this.selectConstructor}>
-              <BurgerIcon type={(this.state.selectedPage === CONSTRUCTOR_SELECTED ? "primary" : "secondary")} />
-              <span className={(this.state.selectedPage === CONSTRUCTOR_SELECTED ? textStyle : inactiveTextStyle)}>Конструктор</span>
-            </div>
-            <div className={itemStyle} onClick={this.selectOrders}>
-              <ListIcon type={(this.state.selectedPage === ORDERS_SELECTED ? "primary" : "secondary")} />
-              <span className={(this.state.selectedPage === ORDERS_SELECTED ? textStyle : inactiveTextStyle)}>Лента заказов</span>
-            </div>
+  return (
+    <header className={`pt-4 pb-4`}>
+      <div className={style.menus}>
+        <div className={style.group}>
+          <div className={itemStyle} onClick={selectConstructor}>
+            <BurgerIcon
+              type={
+                selectedPage === CONSTRUCTOR_SELECTED
+                  ? "primary"
+                  : "secondary"
+              }
+            />
+            <span
+              className={
+                selectedPage === CONSTRUCTOR_SELECTED
+                  ? textStyle
+                  : inactiveTextStyle
+              }
+            >
+              Конструктор
+            </span>
+          </div>
+          <div className={itemStyle} onClick={selectOrders}>
+            <ListIcon
+              type={
+                selectedPage === ORDERS_SELECTED
+                  ? "primary"
+                  : "secondary"
+              }
+            />
+            <span
+              className={
+                selectedPage === ORDERS_SELECTED
+                  ? textStyle
+                  : inactiveTextStyle
+              }
+            >
+              Лента заказов
+            </span>
           </div>
         </div>
-  
-        <Logo className={style.logo} />
-  
-        <div className={style.profile}>
-          <div className={itemStyle} onClick={this.selectProfile}>
-            <ProfileIcon type={(this.state.selectedPage === PROFILE_SELECTED ? "primary" : "secondary")} />
-            <span className={(this.state.selectedPage === PROFILE_SELECTED ? textStyle : inactiveTextStyle)}>Личный кабинет</span>
-          </div>
+      </div>
+
+      <Logo className={style.logo} />
+
+      <div className={style.profile}>
+        <div className={itemStyle} onClick={selectProfile}>
+          <ProfileIcon
+            type={
+              selectedPage === PROFILE_SELECTED
+                ? "primary"
+                : "secondary"
+            }
+          />
+          <span
+            className={
+              selectedPage === PROFILE_SELECTED
+                ? textStyle
+                : inactiveTextStyle
+            }
+          >
+            Личный кабинет
+          </span>
         </div>
-      </header>
-    );
-  }
-  
+      </div>
+    </header>
+  );
 };
 
 export default AppHeader;

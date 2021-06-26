@@ -20,8 +20,7 @@ const BurgerItem = (props) => {
 BurgerItem.propTypes = {
   chosen: PropTypes.arrayOf(PropTypes.object),
   item: PropTypes.object,
-  key: PropTypes.string,
-  rightPadding: PropTypes.string
+  rightPadding: PropTypes.string,
 }
 
 export default BurgerItem;

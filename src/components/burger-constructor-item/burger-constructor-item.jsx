@@ -4,9 +4,9 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import style from "./burger-constructor-item.module.css";
 import TYPES from '../../utils/ingredientTypes';
+import PropTypes from 'prop-types';
 
 const BurgerConstructorItem = (props) => {
-  console.log(props.postfix)
   const isWithPostfix = (props.type !== TYPES.bun) && (props.postfix !== undefined);
   return (
     <div className={`${style.item} mt-4 mb-4 ${props.isLocked ? "mr-5" : "mr-2"}`}>
@@ -26,5 +26,16 @@ const BurgerConstructorItem = (props) => {
     </div>
   );
 };
+
+BurgerConstructorItem.propTypes = {
+  type: PropTypes.string,
+  isLocked: PropTypes.bool,
+  text: PropTypes.string.isRequired,
+  price: PropTypes.number.isRequired,
+  thumbnail: PropTypes.string.isRequired,
+  postfix: PropTypes.string
+}
+
+
 
 export default BurgerConstructorItem;
