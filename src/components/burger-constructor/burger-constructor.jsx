@@ -33,6 +33,7 @@ const BurgerConstructor = (props) => {
               text={bun.name}
               price={bun.price}
               thumbnail={bun.image}
+              postfix=" (верх)"
             />
           )}
           <div className={style.items}>
@@ -56,6 +57,7 @@ const BurgerConstructor = (props) => {
               text={bun.name}
               price={bun.price}
               thumbnail={bun.image}
+              postfix=" (низ)"
             />
           )}
         </div>

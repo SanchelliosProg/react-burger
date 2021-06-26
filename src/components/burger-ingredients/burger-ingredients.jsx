@@ -3,15 +3,16 @@ import style from "./burger-ingredients.module.css";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import IngredientsSection from "../ingredients-section/ingredients-section";
 import PropTypes from 'prop-types';
+import TYPES from '../../utils/ingredientTypes.js';
 
-const BUNS = "bun";
-const SAUCE = "sauce";
-const MAIN = "main"; //Начинки
+// const BUNS = "bun";
+// const SAUCE = "sauce";
+// const MAIN = "main"; //Начинки
 
 class BurgerIngredients extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { currentTab: BUNS };
+    this.state = { currentTab: TYPES.bun };
   }
 
   setCurrentTab = (tab) => {
@@ -19,22 +20,19 @@ class BurgerIngredients extends React.Component {
   };
 
   getBunsFormData = () => {
-    return this.props.data.filter((item) => item.type === BUNS);
+    return this.props.data.filter((item) => item.type === TYPES.bun);
   };
 
   getSaucesFromData = () => {
-    return this.props.data.filter((item) => item.type === SAUCE);
+    return this.props.data.filter((item) => item.type === TYPES.sauce);
   };
 
   getMainFromData = () => {
-    return this.props.data.filter((item) => item.type === MAIN);
+    return this.props.data.filter((item) => item.type === TYPES.main);
   };
 
-  countIngredient = (type) => {
-
-  }
-
   render() {
+    console.log(TYPES);
     return (
       <>
         <h1 className={`text text_type_main-large  pt-10 pb-5`}>
@@ -42,33 +40,33 @@ class BurgerIngredients extends React.Component {
         </h1>
         <div className={`${style.tabs} pb-10`}>
           <Tab
-            value={BUNS}
-            active={this.state.currentTab === BUNS}
+            value={TYPES.bun}
+            active={this.state.currentTab === TYPES.bun}
             onClick={this.setCurrentTab}
           >
             Булки
           </Tab>
 
           <Tab
-            value={SAUCE}
-            active={this.state.currentTab === SAUCE}
+            value={TYPES.sauce}
+            active={this.state.currentTab === TYPES.sauce}
             onClick={this.setCurrentTab}
           >
             Соусы
           </Tab>
 
           <Tab
-            value={MAIN}
-            active={this.state.currentTab === MAIN}
+            value={TYPES.main}
+            active={this.state.currentTab === TYPES.main}
             onClick={this.setCurrentTab}
           >
             Начинки
           </Tab>
         </div>
         <div className={style.items}>
-          <IngredientsSection items={this.getBunsFormData()} id={BUNS} title="Булки"/>
-          <IngredientsSection items={this.getSaucesFromData()} id={SAUCE} title="Соусы"/>
-          <IngredientsSection items={this.getMainFromData()} id={MAIN} title="Начинка"/>
+          <IngredientsSection items={this.getBunsFormData()} id={TYPES.bun} title="Булки"/>
+          <IngredientsSection items={this.getSaucesFromData()} id={TYPES.sauce} title="Соусы"/>
+          <IngredientsSection items={this.getMainFromData()} id={TYPES.main} title="Начинка"/>
         </div>
       </>
     );
