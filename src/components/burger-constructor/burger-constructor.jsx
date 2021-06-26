@@ -5,6 +5,7 @@ import {
   Button,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import PropTypes from "prop-types";
+import type from '../../utils/ingredientTypes';
 
 const BurgerConstructor = (props) => {
   const bun = props.chosen.find((obj) => obj.type === "bun");
@@ -17,7 +18,7 @@ const BurgerConstructor = (props) => {
   const getTotalPrice = () => {
     let totalPrice = 0;
     props.chosen.forEach((item) => {
-      totalPrice += item.price;
+      totalPrice += (item.type === type.bun) ? item.price * 2 : item.price;
     });
     return totalPrice;
   };
