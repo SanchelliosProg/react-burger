@@ -1,0 +1,13 @@
+.tabs {
+  display: flex;
+}
+
+.items {
+  overflow-y: auto;
+  height: 65vh;
+}
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+}

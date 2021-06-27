@@ -1,0 +1,15 @@
+.item {
+  display: grid;
+  grid-template-columns: 32px 1fr;
+  align-items: center;
+  justify-items: center;
+}
+
+.drag {
+  grid-column-start: 1;
+}
+
+.info {
+  align-self: stretch;
+  grid-column-start: 2;
+}

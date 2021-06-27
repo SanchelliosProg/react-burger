@@ -1,0 +1,36 @@
+header {
+  display: grid;
+  grid-template-columns: 12% 28% 20% 21% 19%;
+  align-items: center;
+  justify-items: center;
+}
+
+.menus {
+  grid-column-start: 2;
+}
+
+.logo {
+  position: absolute;
+  /* grid-column-start: 3; */
+}
+
+.profile {
+  grid-column-start: 4;
+  justify-self: end;
+}
+
+.item {
+  display: flex;
+  justify-items: center;
+  align-items: center;
+  flex-direction: row;
+  cursor: pointer;
+}
+
+.group {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+}
+
+
