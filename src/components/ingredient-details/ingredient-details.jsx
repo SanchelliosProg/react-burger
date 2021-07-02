@@ -1,11 +1,11 @@
 import ReactDOM from "react-dom";
 import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
-import style from "./ingredient-modal.module.css";
+import style from "./ingredient-details.module.css";
 import Nutrition from "../nutrition/nutrition";
 
 const modalRoot = document.getElementById("react-modals");
 
-const IngredientModal = (props) => {
+const IngredientDetails = (props) => {
   return ReactDOM.createPortal(
     <>
       <div className={style.overlay} onClick={props.onClose}>
@@ -32,9 +32,9 @@ const IngredientModal = (props) => {
             </span>
           </div>
           <div className={`${style.details} mb-15`}>
-            <Nutrition text="Калории, ккал" number={props.item.calories} />
-            <Nutrition text="Белки, г" number={props.item.proteins} />
-            <Nutrition text="Жиры, г" number={props.item.fat} />
+            <Nutrition text="Калории, ккал" number={props.item.calories} margins="mr-5"/>
+            <Nutrition text="Белки, г" number={props.item.proteins} margins="mr-5"/>
+            <Nutrition text="Жиры, г" number={props.item.fat} margins="mr-5"/>
             <Nutrition text="Углеводы, г" number={props.item.carbohydrates} />
           </div>
         </div>
@@ -44,4 +44,4 @@ const IngredientModal = (props) => {
   );
 };
 
-export default IngredientModal;
+export default IngredientDetails;
