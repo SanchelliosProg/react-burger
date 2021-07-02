@@ -5,7 +5,7 @@ import {
 import style from "./burger-item.module.css";
 import PropTypes from "prop-types";
 import { useState } from "react";
-import Modal from "../modal/modal";
+import IngredientModal from "../modal/ingredient-modal";
 
 const BurgerItem = (props) => {
   const counter = props.chosen.filter(
@@ -19,7 +19,7 @@ const BurgerItem = (props) => {
 
   return (
     <>
-      {isModalOpened && <Modal onClose={toggleModalState}/>}
+      {isModalOpened && <IngredientModal onClose={toggleModalState} item={props.item}/>}
       <div
         className={`${style.container} ${props.rightPadding}`}
         onClick={toggleModalState}
