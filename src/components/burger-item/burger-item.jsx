@@ -5,7 +5,9 @@ import {
 import style from "./burger-item.module.css";
 import PropTypes from "prop-types";
 import { useState } from "react";
-import IngredientDetails from "../ingredient-details/ingredient-details";
+import Modal from "../modal/modal";
+
+const INGREDIENTS = "ingredients";
 
 const BurgerItem = (props) => {
   const counter = props.chosen.filter(
@@ -19,9 +21,9 @@ const BurgerItem = (props) => {
 
   return (
     <>
-      {isModalOpened && <IngredientDetails onClose={toggleModalState} item={props.item}/>}
+      {isModalOpened && <Modal onClose={toggleModalState} item={props.item} view={INGREDIENTS}/>}
       <div
-        className={`${style.container} ${props.rightPadding}`}
+        className={`${style.container} ${props.rightPadding} clickable`}
         onClick={toggleModalState}
       >
         {counter > 0 ? <Counter count={counter} size="default" /> : undefined}

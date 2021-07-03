@@ -3,22 +3,37 @@ import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import style from "./ingredient-details.module.css";
 import Nutrition from "../nutrition/nutrition";
 import PropTypes from "prop-types";
+import { useEffect } from "react";
 
 const modalRoot = document.getElementById("react-modals");
 
 const IngredientDetails = (props) => {
+
+  const closeOnEscapeKeyDown = (e) => {
+    if((e.charCode || e.keyCode) === 27) {
+      props.onClose();
+    }
+  }
+
+  useEffect(() => {
+    document.body.addEventListener('keydown', closeOnEscapeKeyDown);
+    return function cleanup() {
+      document.body.removeEventListener('keydown', closeOnEscapeKeyDown);
+    }
+  })
+
   return ReactDOM.createPortal(
     <>
-      <div className={style.overlay} onClick={props.onClose}>
+      <div className="modaloverlay" onClick={props.onClose}>
         <div
-          className={`${style.modalcontent}`}
+          className="modalcontent"
           onClick={(e) => e.stopPropagation()}
         >
           <div className={`${style.header} ml-10 mt-10 mr-10`}>
             <span className="text text_type_main-large">
               Детали ингредиента
             </span>
-            <div className={`${style.clickable}`}>
+            <div className="clickable">
               <CloseIcon type="primary" onClick={props.onClose} />
             </div>
           </div>
@@ -39,8 +54,9 @@ const IngredientDetails = (props) => {
             <Nutrition text="Углеводы, г" number={props.item.carbohydrates} />
           </div>
         </div>
-      </div>
-    </>,
+       </div>
+    </>
+    ,
     modalRoot
   );
 };

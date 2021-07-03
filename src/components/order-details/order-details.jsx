@@ -5,15 +5,29 @@ import {
 import style from "./order-details.module.css";
 import icon from "../../images/accepted.svg";
 import PropTypes from "prop-types";
+import { useEffect } from "react";
 
 const modalRoot = document.getElementById("react-modals");
 
 const OrderDetails = (props) => {
+  const closeOnEscapeKeyDown = (e) => {
+    if((e.charCode || e.keyCode) === 27) {
+      props.onClose();
+    }
+  }
+
+  useEffect(() => {
+    document.body.addEventListener('keydown', closeOnEscapeKeyDown);
+    return function cleanup() {
+      document.body.removeEventListener('keydown', closeOnEscapeKeyDown);
+    }
+  })
+
   return ReactDOM.createPortal(
-    <div className={style.overlay} onClick={props.onClose}>
-      <div className={style.modalcontent} onClick={(e) => e.stopPropagation()}>
+    <div className="modaloverlay" onClick={props.onClose}>
+      <div className="modalcontent" onClick={(e) => e.stopPropagation()}>
         <div className={style.header}>
-          <div className={`${style.clickable} mr-10`}>
+          <div className={`${style.clickable} mr-10 clickable`}>
             <CloseIcon type="primary" onClick={props.onClose} />
           </div>
         </div>

@@ -7,7 +7,9 @@ import {
 import PropTypes from "prop-types";
 import type from "../../utils/ingredientTypes";
 import { useState } from "react";
-import OrderDetails from "../order-details/order-details";
+import Modal  from "../modal/modal";
+
+const ORDER = "order";
 
 const BurgerConstructor = (props) => {
   const [isOrderDetailsOpened, setOrderDetailsState] = useState(false);
@@ -33,8 +35,10 @@ const BurgerConstructor = (props) => {
   };
 
   return (
-      <>
-      {isOrderDetailsOpened && <OrderDetails onClose={toggleOrderDetails}/>}
+    <>
+      {isOrderDetailsOpened && (
+        <Modal onClose={toggleOrderDetails} view={ORDER}/>
+      )}
       <div className={style.container}>
         <div className="mt-25 mr-4 mb-10 ml-4">
           {isBunSelected() && (
@@ -86,7 +90,7 @@ const BurgerConstructor = (props) => {
           </Button>
         </div>
       </div>
-      </>
+    </>
   );
 };
 
