@@ -1,9 +1,10 @@
 import ReactDOM from "react-dom";
 import {
   CloseIcon,
-  CheckMarkIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import style from "./order-details.module.css";
+import icon from "../../images/accepted.svg";
+import PropTypes from "prop-types";
 
 const modalRoot = document.getElementById("react-modals");
 
@@ -22,6 +23,7 @@ const OrderDetails = (props) => {
         <span className="text text_type_main-medium mb-15">
           идентификатор заказа
         </span>
+        <img src={icon} alt="всё готовится" className={`mb-15`}/>
         <span className="text text_type_main-default mb-2">
           Ваш заказ начали готовить
         </span>
@@ -33,5 +35,9 @@ const OrderDetails = (props) => {
     modalRoot
   );
 };
+
+OrderDetails.propTypes = {
+  onClose: PropTypes.func.isRequired
+}
 
 export default OrderDetails;

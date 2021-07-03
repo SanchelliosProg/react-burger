@@ -2,6 +2,7 @@ import ReactDOM from "react-dom";
 import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import style from "./ingredient-details.module.css";
 import Nutrition from "../nutrition/nutrition";
+import PropTypes from "prop-types";
 
 const modalRoot = document.getElementById("react-modals");
 
@@ -43,5 +44,10 @@ const IngredientDetails = (props) => {
     modalRoot
   );
 };
+
+IngredientDetails.propTypes = {
+  onClose: PropTypes.func.isRequired,
+  item: PropTypes.object
+}
 
 export default IngredientDetails;

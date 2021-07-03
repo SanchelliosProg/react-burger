@@ -15,9 +15,7 @@ const App = () => {
     fetch(url, { method: "GET" })
       .then((resp) => resp.json())
       .then((body) => {
-        console.log('fetched data', body.data)
         setIngredients(body.data);
-        console.log('new state', ingredients);
       }).catch(e => {
         console.log('Error while fetching data: ', e);
       });
