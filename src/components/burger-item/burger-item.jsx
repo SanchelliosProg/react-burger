@@ -21,7 +21,14 @@ const BurgerItem = (props) => {
 
   return (
     <>
-      {isModalOpened && <Modal onClose={toggleModalState} item={props.item} view={INGREDIENTS}/>}
+      {isModalOpened && (
+        <Modal
+          onClose={toggleModalState}
+          item={props.item}
+          view={INGREDIENTS}
+          title="Детали ингредиента"
+        />
+      )}
       <div
         className={`${style.container} ${props.rightPadding} clickable`}
         onClick={toggleModalState}
