@@ -13,7 +13,12 @@ const App = () => {
 
   useEffect(() => {
     fetch(url, { method: "GET" })
-      .then((resp) => resp.json())
+      .then((resp) => {
+        if (resp.ok) {
+          return resp.json();
+        }
+        return Promise.reject(`Ошибка ${resp.status}`);
+      })
       .then((body) => {
         setIngredients(body.data);
       }).catch(e => {

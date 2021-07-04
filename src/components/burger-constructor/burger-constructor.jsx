@@ -28,7 +28,7 @@ const BurgerConstructor = (props) => {
   const getTotalPrice = () => {
     let totalPrice = 0;
     props.chosen.forEach((item) => {
-      totalPrice += item.type === type.bun ? item.price * 2 : item.price;
+      totalPrice += item.price;
     });
     return totalPrice;
   };
