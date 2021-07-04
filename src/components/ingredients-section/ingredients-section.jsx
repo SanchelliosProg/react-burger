@@ -19,6 +19,8 @@ const IngredientsSection = (props) => {
               item={item}
               key={item._id}
               rightPadding={(index + 1) % 2 !== 0 ? "pr-6" : ""}
+              selectItem={props.selectItem} //PROPS DRILL
+              toggleModalState={props.toggleModalState} //PROPs DRILL
             />
           );
         })}
@@ -28,8 +30,10 @@ const IngredientsSection = (props) => {
 };
 
 IngredientsSection.propTypes = {
-  items: PropTypes.arrayOf(PropTypes.object),
-  id: PropTypes.string
+  items: PropTypes.arrayOf(PropTypes.object).isRequired,
+  id: PropTypes.string,
+  selectItem: PropTypes.func.isRequired, 
+  toggleModalState: PropTypes.func.isRequired,
 }
 
 export default IngredientsSection;

@@ -5,10 +5,9 @@ import {
   Button,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import PropTypes from "prop-types";
-import type from "../../utils/ingredientTypes";
 import { useState } from "react";
 import Modal  from "../modal/modal";
-import { ORDER_MODAL } from "../../utils/constants";
+import OrderDetails from "../order-details/order-details";
 
 const BurgerConstructor = (props) => {
   const [isOrderDetailsOpened, setOrderDetailsState] = useState(false);
@@ -36,13 +35,14 @@ const BurgerConstructor = (props) => {
   return (
     <>
       {isOrderDetailsOpened && (
-        <Modal onClose={toggleOrderDetails} view={ORDER_MODAL}/>
+        <Modal onClose={toggleOrderDetails}>
+          <OrderDetails/>
+        </Modal>
       )}
       <div className={style.container}>
         <div className="mt-25 mr-4 mb-10 ml-4">
           {isBunSelected() && (
             <BurgerConstructorItem
-              key="top"
               type="top"
               isLocked={true}
               text={bun.name}
@@ -66,7 +66,6 @@ const BurgerConstructor = (props) => {
 
           {isBunSelected() && (
             <BurgerConstructorItem
-              key="bottom"
               type="bottom"
               isLocked={true}
               text={bun.name}
@@ -94,7 +93,7 @@ const BurgerConstructor = (props) => {
 };
 
 BurgerConstructor.propTypes = {
-  chosen: PropTypes.arrayOf(PropTypes.object),
+  chosen: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 export default BurgerConstructor;

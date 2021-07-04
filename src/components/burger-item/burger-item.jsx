@@ -4,33 +4,22 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import style from "./burger-item.module.css";
 import PropTypes from "prop-types";
-import { useState } from "react";
-import Modal from "../modal/modal";
-import { INGREDIENTS_MODAL } from "../../utils/constants";
 
 const BurgerItem = (props) => {
   const counter = props.chosen.filter(
     (choice) => choice.name === props.item.name
   ).length;
-  const [isModalOpened, setModalState] = useState(false);
-  const toggleModalState = () => {
-    console.log("toggleModalState in BurgerItem is called");
-    setModalState(!isModalOpened);
-  };
+
+  const openModalWithCurrentItem = () => {
+    props.toggleModalState();
+    props.selectItem(props.item);
+  }
 
   return (
     <>
-      {isModalOpened && (
-        <Modal
-          onClose={toggleModalState}
-          item={props.item}
-          view={INGREDIENTS_MODAL}
-          title="Детали ингредиента"
-        />
-      )}
       <div
         className={`${style.container} ${props.rightPadding} clickable`}
-        onClick={toggleModalState}
+        onClick={openModalWithCurrentItem}
       >
         {counter > 0 ? <Counter count={counter} size="default" /> : undefined}
         <img
@@ -53,9 +42,11 @@ const BurgerItem = (props) => {
 };
 
 BurgerItem.propTypes = {
-  chosen: PropTypes.arrayOf(PropTypes.object),
+  chosen: PropTypes.arrayOf(PropTypes.object).isRequired,
   item: PropTypes.object,
   rightPadding: PropTypes.string,
+  selectItem: PropTypes.func.isRequired, 
+  toggleModalState: PropTypes.func.isRequired,
 };
 
 export default BurgerItem;
