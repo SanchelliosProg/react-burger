@@ -36,6 +36,4 @@ BurgerConstructorItem.propTypes = {
   postfix: PropTypes.string
 }
 
-
-
 export default BurgerConstructorItem;

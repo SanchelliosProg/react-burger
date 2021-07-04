@@ -34,8 +34,7 @@ const IngredientDetails = (props) => {
 };
 
 IngredientDetails.propTypes = {
-  onClose: PropTypes.func.isRequired,
-  item: PropTypes.object,
+  item: PropTypes.object.isRequired,
 };
 
 export default IngredientDetails;

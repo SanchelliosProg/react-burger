@@ -6,8 +6,7 @@ import style from "./burger-item.module.css";
 import PropTypes from "prop-types";
 import { useState } from "react";
 import Modal from "../modal/modal";
-
-const INGREDIENTS = "ingredients";
+import { INGREDIENTS_MODAL } from "../../utils/constants";
 
 const BurgerItem = (props) => {
   const counter = props.chosen.filter(
@@ -25,7 +24,7 @@ const BurgerItem = (props) => {
         <Modal
           onClose={toggleModalState}
           item={props.item}
-          view={INGREDIENTS}
+          view={INGREDIENTS_MODAL}
           title="Детали ингредиента"
         />
       )}

@@ -8,8 +8,7 @@ import PropTypes from "prop-types";
 import type from "../../utils/ingredientTypes";
 import { useState } from "react";
 import Modal  from "../modal/modal";
-
-const ORDER = "order";
+import { ORDER_MODAL } from "../../utils/constants";
 
 const BurgerConstructor = (props) => {
   const [isOrderDetailsOpened, setOrderDetailsState] = useState(false);
@@ -37,7 +36,7 @@ const BurgerConstructor = (props) => {
   return (
     <>
       {isOrderDetailsOpened && (
-        <Modal onClose={toggleOrderDetails} view={ORDER}/>
+        <Modal onClose={toggleOrderDetails} view={ORDER_MODAL}/>
       )}
       <div className={style.container}>
         <div className="mt-25 mr-4 mb-10 ml-4">

@@ -1,6 +1,5 @@
 import style from "./order-details.module.css";
 import icon from "../../images/accepted.svg";
-import PropTypes from "prop-types";
 
 const OrderDetails = (props) => {
   return (
@@ -20,10 +19,6 @@ const OrderDetails = (props) => {
       </span>
     </>
   );
-};
-
-OrderDetails.propTypes = {
-  onClose: PropTypes.func.isRequired,
 };
 
 export default OrderDetails;
