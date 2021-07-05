@@ -1,12 +1,16 @@
-import React from "react";
+import { useState } from "react";
 import style from "./burger-ingredients.module.css";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import IngredientsSection from "../ingredients-section/ingredients-section";
-import PropTypes from 'prop-types';
-import type from '../../utils/ingredientTypes.js';
+import PropTypes from "prop-types";
+import type from "../../utils/ingredientTypes.js";
+import Modal from "../modal/modal";
+import IngredientDetails from "../ingredient-details/ingredient-details";
 
 const BurgerIngredients = (props) => {
-  const [currentTab, setTab] = React.useState(type.bun)
+  const [isModalOpened, setModalState] = useState(false);
+  const [currentTab, setTab] = useState(type.bun);
+  const [selectedItem, selectItem] = useState({});
 
   const setCurrentTab = (tab) => {
     setTab(tab);
@@ -24,49 +28,78 @@ const BurgerIngredients = (props) => {
     return props.data.filter((item) => item.type === type.main);
   };
 
+  const toggleModalState = () => {
+    console.log("toggleModalState in BurgerItem is called");
+    setModalState(!isModalOpened);
+  };
 
-    return (
-      <>
-        <h1 className={`text text_type_main-large  pt-10 pb-5`}>
-          Соберите бургер
-        </h1>
-        <div className={`${style.tabs} pb-10`}>
-          <Tab
-            value={type.bun}
-            active={currentTab === type.bun}
-            onClick={setCurrentTab}
-          >
-            Булки
-          </Tab>
+  return (
+    <>
+      {isModalOpened && (
+        <Modal
+          onClose={toggleModalState}
+          title="Детали ингредиента"
+        >
+          <IngredientDetails item={selectedItem} />
+        </Modal>
+      )}
+      <h1 className={`text text_type_main-large  pt-10 pb-5`}>
+        Соберите бургер
+      </h1>
+      <div className={`${style.tabs} pb-10`}>
+        <Tab
+          value={type.bun}
+          active={currentTab === type.bun}
+          onClick={setCurrentTab}
+        >
+          Булки
+        </Tab>
 
-          <Tab
-            value={type.sauce}
-            active={currentTab === type.sauce}
-            onClick={setCurrentTab}
-          >
-            Соусы
-          </Tab>
+        <Tab
+          value={type.sauce}
+          active={currentTab === type.sauce}
+          onClick={setCurrentTab}
+        >
+          Соусы
+        </Tab>
 
-          <Tab
-            value={type.main}
-            active={currentTab === type.main}
-            onClick={setCurrentTab}
-          >
-            Начинки
-          </Tab>
-        </div>
-        <div className={style.items}>
-          <IngredientsSection items={getBunsFormData()} id={type.bun} title="Булки"/>
-          <IngredientsSection items={getSaucesFromData()} id={type.sauce} title="Соусы"/>
-          <IngredientsSection items={getMainFromData()} id={type.main} title="Начинка"/>
-        </div>
-      </>
-    );
-  
-}
+        <Tab
+          value={type.main}
+          active={currentTab === type.main}
+          onClick={setCurrentTab}
+        >
+          Начинки
+        </Tab>
+      </div>
+      <div className={style.items}>
+        <IngredientsSection
+          items={getBunsFormData()}
+          id={type.bun}
+          title="Булки"
+          selectItem={selectItem}
+          toggleModalState={toggleModalState}
+        />
+        <IngredientsSection
+          items={getSaucesFromData()}
+          id={type.sauce}
+          title="Соусы"
+          selectItem={selectItem}
+          toggleModalState={toggleModalState}
+        />
+        <IngredientsSection
+          items={getMainFromData()}
+          id={type.main}
+          title="Начинка"
+          selectItem={selectItem}
+          toggleModalState={toggleModalState}
+        />
+      </div>
+    </>
+  );
+};
 
 BurgerIngredients.propTypes = {
-  data: PropTypes.arrayOf(PropTypes.object)
-}
+  data: PropTypes.arrayOf(PropTypes.object).isRequired,
+};
 
 export default BurgerIngredients;

@@ -1,2 +1,5 @@
  /* Используемая UI библиотека
  https://yandex-praktikum.github.io/react-developer-burger-ui-components/docs/ */
+ .clickable {
+  cursor: pointer;
+}

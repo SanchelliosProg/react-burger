@@ -5,9 +5,18 @@ import {
   Button,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import PropTypes from "prop-types";
-import type from '../../utils/ingredientTypes';
+import { useState } from "react";
+import Modal  from "../modal/modal";
+import OrderDetails from "../order-details/order-details";
 
 const BurgerConstructor = (props) => {
+  const [isOrderDetailsOpened, setOrderDetailsState] = useState(false);
+
+  const toggleOrderDetails = () => {
+    console.log("toggleOrderDetails is called", isOrderDetailsOpened);
+    setOrderDetailsState(!isOrderDetailsOpened);
+  };
+
   const bun = props.chosen.find((obj) => obj.type === "bun");
   const isBunSelected = () => {
     return bun !== undefined;
@@ -18,17 +27,22 @@ const BurgerConstructor = (props) => {
   const getTotalPrice = () => {
     let totalPrice = 0;
     props.chosen.forEach((item) => {
-      totalPrice += (item.type === type.bun) ? item.price * 2 : item.price;
+      totalPrice += item.price;
     });
     return totalPrice;
   };
 
   return (
-    <div className={style.container}>
+    <>
+      {isOrderDetailsOpened && (
+        <Modal onClose={toggleOrderDetails}>
+          <OrderDetails/>
+        </Modal>
+      )}
+      <div className={style.container}>
         <div className="mt-25 mr-4 mb-10 ml-4">
           {isBunSelected() && (
             <BurgerConstructorItem
-              key="top"
               type="top"
               isLocked={true}
               text={bun.name}
@@ -39,20 +53,19 @@ const BurgerConstructor = (props) => {
           )}
           <div className={style.items}>
             {getIngredients().map((item, index) => {
-            return (
-              <BurgerConstructorItem
-                key={`${item._id}${index}`}
-                text={item.name}
-                price={item.price}
-                thumbnail={item.image}
-              />
-            );
-          })}
+              return (
+                <BurgerConstructorItem
+                  key={`${item._id}${index}`}
+                  text={item.name}
+                  price={item.price}
+                  thumbnail={item.image}
+                />
+              );
+            })}
           </div>
 
           {isBunSelected() && (
             <BurgerConstructorItem
-              key="bottom"
               type="bottom"
               isLocked={true}
               text={bun.name}
@@ -63,24 +76,24 @@ const BurgerConstructor = (props) => {
           )}
         </div>
 
-
-      <div className={`${style.total} mt-10 mb-10 mr-4`}>
-        <div className={`${style.price} mr-10`}>
-          <span className="text text_type_digits-medium pr-1">
-            {getTotalPrice()}
-          </span>
-          <CurrencyIcon type="primary" />
+        <div className={`${style.total} mt-10 mb-10 mr-4`}>
+          <div className={`${style.price} mr-10`}>
+            <span className="text text_type_digits-medium pr-1">
+              {getTotalPrice()}
+            </span>
+            <CurrencyIcon type="primary" />
+          </div>
+          <Button type="primary" size="large" onClick={toggleOrderDetails}>
+            Оформить заказ
+          </Button>
         </div>
-        <Button type="primary" size="large">
-          Оформить заказ
-        </Button>
       </div>
-    </div>
+    </>
   );
 };
 
 BurgerConstructor.propTypes = {
-  chosen: PropTypes.arrayOf(PropTypes.object)
-}
+  chosen: PropTypes.arrayOf(PropTypes.object).isRequired,
+};
 
 export default BurgerConstructor;

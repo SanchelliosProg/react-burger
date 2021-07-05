@@ -1,0 +1,18 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  width: 600px;
+  align-items: center;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  width: 450px;
+}
+
+.details {
+  display: flex;
+  justify-content: space-between;
+  width: 450px;
+}

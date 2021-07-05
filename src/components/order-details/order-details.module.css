@@ -1,0 +1,25 @@
+.header {
+  display: flex;
+  width: 600px;
+  height: 120px;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  width: 450px;
+}
+
+.details {
+  display: flex;
+  justify-content: space-between;
+  width: 450px;
+}
+
+.order {
+  text-shadow: 0 0 30px blue;
+}
+
+
