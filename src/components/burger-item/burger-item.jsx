@@ -4,8 +4,15 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import style from "./burger-item.module.css";
 import PropTypes from "prop-types";
+import { useDrag } from "react-dnd";
 
 const BurgerItem = (props) => {
+  const itemId = props.item._id;
+  const [, dragRef] = useDrag({
+    type: "ingredient",
+    item: {itemId}
+  });
+
   const counter = props.chosen.filter(
     (choice) => choice.name === props.item.name
   ).length;
@@ -18,6 +25,7 @@ const BurgerItem = (props) => {
   return (
     <>
       <div
+        ref={dragRef}
         className={`${style.container} ${props.rightPadding} clickable`}
         onClick={openModalWithCurrentItem}
       >

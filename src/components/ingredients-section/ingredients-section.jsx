@@ -1,9 +1,14 @@
 import BurgerItem from "../burger-item/burger-item";
 import style from "./ingredients-section.module.css";
-import chosen from "../../utils/chosen.js";
 import PropTypes from 'prop-types';
+import { useSelector } from "react-redux";
 
 const IngredientsSection = (props) => {
+  const {chosen} = useSelector(store => ({
+    chosen: store.constructorIngredients.chosen
+  })); 
+
+  console.log('CHOSEN', chosen);
   
   return (
     <>

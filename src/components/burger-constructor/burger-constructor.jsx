@@ -4,29 +4,34 @@ import {
   CurrencyIcon,
   Button,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import PropTypes from "prop-types";
 import { useState } from "react";
 import Modal  from "../modal/modal";
 import OrderDetails from "../order-details/order-details";
+import { useSelector } from "react-redux";
 
-const BurgerConstructor = (props) => {
+const BurgerConstructor = () => {
   const [isOrderDetailsOpened, setOrderDetailsState] = useState(false);
+  const {chosen} = useSelector(store => ({
+    chosen: store.constructorIngredients.chosen
+  }));
+
+  console.log("CHOSEN***", chosen);
 
   const toggleOrderDetails = () => {
     console.log("toggleOrderDetails is called", isOrderDetailsOpened);
     setOrderDetailsState(!isOrderDetailsOpened);
   };
 
-  const bun = props.chosen.find((obj) => obj.type === "bun");
+  const bun = chosen.find((obj) => obj.type === "bun");
   const isBunSelected = () => {
     return bun !== undefined;
   };
 
-  const getIngredients = () => props.chosen.filter((obj) => obj.type !== "bun");
+  const getIngredients = () => chosen.filter((obj) => obj.type !== "bun");
 
   const getTotalPrice = () => {
     let totalPrice = 0;
-    props.chosen.forEach((item) => {
+    chosen.forEach((item) => {
       totalPrice += item.price;
     });
     return totalPrice;
@@ -59,6 +64,7 @@ const BurgerConstructor = (props) => {
                   text={item.name}
                   price={item.price}
                   thumbnail={item.image}
+                  item={item}
                 />
               );
             })}
@@ -90,10 +96,6 @@ const BurgerConstructor = (props) => {
       </div>
     </>
   );
-};
-
-BurgerConstructor.propTypes = {
-  chosen: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 export default BurgerConstructor;

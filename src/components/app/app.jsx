@@ -3,39 +3,31 @@ import BurgerIngredients from "../burger-ingredients/burger-ingredients";
 import BurgerConstructor from "../burger-constructor/burger-constructor";
 import style from "./app.module.css";
 import chosen from "../../utils/chosen.js";
-import { useState } from "react";
 import { useEffect } from "react";
-
-const url = "https://norma.nomoreparties.space/api/ingredients";
+import { useDispatch } from "react-redux";
+import { getIngredients } from "../../services/reducers/ingredients";
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
 
 const App = () => {
-  const [ingredients, setIngredients] = useState([]);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    fetch(url, { method: "GET" })
-      .then((resp) => {
-        if (resp.ok) {
-          return resp.json();
-        }
-        return Promise.reject(`Ошибка ${resp.status}`);
-      })
-      .then((body) => {
-        setIngredients(body.data);
-      }).catch(e => {
-        console.log('Error while fetching data: ', e);
-      });
+    dispatch(getIngredients());
   }, []);
 
   return (
     <>
       <AppHeader />
       <main>
-        <section className={`${style.ingredients}`}>
-          <BurgerIngredients data={ingredients} />
-        </section>
-        <section className={`pr-10`}>
-          <BurgerConstructor chosen={chosen} />
-        </section>
+        <DndProvider backend={HTML5Backend}>
+          <section className={`${style.ingredients}`}>
+            <BurgerIngredients />
+          </section>
+          <section className={`pr-10`}>
+            <BurgerConstructor chosen={chosen} />
+          </section>
+        </DndProvider>
       </main>
     </>
   );

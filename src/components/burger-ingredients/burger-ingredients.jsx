@@ -2,12 +2,19 @@ import { useState } from "react";
 import style from "./burger-ingredients.module.css";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import IngredientsSection from "../ingredients-section/ingredients-section";
-import PropTypes from "prop-types";
 import type from "../../utils/ingredientTypes.js";
 import Modal from "../modal/modal";
 import IngredientDetails from "../ingredient-details/ingredient-details";
+import { useSelector } from "react-redux";
 
-const BurgerIngredients = (props) => {
+const BurgerIngredients = () => {
+  const {ingredients} = useSelector((store) => ({
+    ingredients: store.ingredients.data
+  }));
+
+  console.log("Ingredients in BurgerIngredients", ingredients);
+  
+  
   const [isModalOpened, setModalState] = useState(false);
   const [currentTab, setTab] = useState(type.bun);
   const [selectedItem, selectItem] = useState({});
@@ -17,15 +24,15 @@ const BurgerIngredients = (props) => {
   };
 
   const getBunsFormData = () => {
-    return props.data.filter((item) => item.type === type.bun);
+    return ingredients.filter((item) => item.type === type.bun);
   };
 
   const getSaucesFromData = () => {
-    return props.data.filter((item) => item.type === type.sauce);
+    return ingredients.filter((item) => item.type === type.sauce);
   };
 
   const getMainFromData = () => {
-    return props.data.filter((item) => item.type === type.main);
+    return ingredients.filter((item) => item.type === type.main);
   };
 
   const toggleModalState = () => {
@@ -36,10 +43,7 @@ const BurgerIngredients = (props) => {
   return (
     <>
       {isModalOpened && (
-        <Modal
-          onClose={toggleModalState}
-          title="Детали ингредиента"
-        >
+        <Modal onClose={toggleModalState} title="Детали ингредиента">
           <IngredientDetails item={selectedItem} />
         </Modal>
       )}
@@ -99,7 +103,7 @@ const BurgerIngredients = (props) => {
 };
 
 BurgerIngredients.propTypes = {
-  data: PropTypes.arrayOf(PropTypes.object).isRequired,
+  
 };
 
 export default BurgerIngredients;
