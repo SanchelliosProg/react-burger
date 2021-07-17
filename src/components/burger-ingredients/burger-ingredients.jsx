@@ -8,16 +8,13 @@ import IngredientDetails from "../ingredient-details/ingredient-details";
 import { useSelector } from "react-redux";
 
 const BurgerIngredients = () => {
-  const {ingredients} = useSelector((store) => ({
-    ingredients: store.ingredients.data
+  
+  const {ingredients, isModalOpened} = useSelector((store) => ({
+    ingredients: store.ingredients.data,
+    isModalOpened: store.modal.isOpened
   }));
 
-  console.log("Ingredients in BurgerIngredients", ingredients);
-  
-  
-  const [isModalOpened, setModalState] = useState(false);
   const [currentTab, setTab] = useState(type.bun);
-  const [selectedItem, selectItem] = useState({});
 
   const setCurrentTab = (tab) => {
     setTab(tab);
@@ -35,16 +32,11 @@ const BurgerIngredients = () => {
     return ingredients.filter((item) => item.type === type.main);
   };
 
-  const toggleModalState = () => {
-    console.log("toggleModalState in BurgerItem is called");
-    setModalState(!isModalOpened);
-  };
-
   return (
     <>
       {isModalOpened && (
-        <Modal onClose={toggleModalState} title="Детали ингредиента">
-          <IngredientDetails item={selectedItem} />
+        <Modal title="Детали ингредиента">
+          <IngredientDetails/>
         </Modal>
       )}
       <h1 className={`text text_type_main-large  pt-10 pb-5`}>
@@ -80,22 +72,21 @@ const BurgerIngredients = () => {
           items={getBunsFormData()}
           id={type.bun}
           title="Булки"
-          selectItem={selectItem}
-          toggleModalState={toggleModalState}
+          
+          
         />
         <IngredientsSection
           items={getSaucesFromData()}
           id={type.sauce}
           title="Соусы"
-          selectItem={selectItem}
-          toggleModalState={toggleModalState}
+          
+          
         />
         <IngredientsSection
           items={getMainFromData()}
           id={type.main}
           title="Начинка"
-          selectItem={selectItem}
-          toggleModalState={toggleModalState}
+          
         />
       </div>
     </>

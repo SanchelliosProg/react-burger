@@ -7,18 +7,30 @@ import {
 import { useState } from "react";
 import Modal  from "../modal/modal";
 import OrderDetails from "../order-details/order-details";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { useDrop } from "react-dnd";
+import { addIngredient } from "../../services/reducers/constructor-ingredients";
 
 const BurgerConstructor = () => {
-  const [isOrderDetailsOpened, setOrderDetailsState] = useState(false);
-  const {chosen} = useSelector(store => ({
-    chosen: store.constructorIngredients.chosen
+  const {chosen, ingredients} = useSelector(store => ({
+    chosen: store.constructorIngredients.chosen,
+    ingredients: store.ingredients.data
   }));
 
-  console.log("CHOSEN***", chosen);
+  const dispatch = useDispatch();
+
+  const [, drop] = useDrop({
+    accept: "ingredient",
+    drop(itemId) {
+      const ingredient = ingredients.find(item => item._id === itemId.id);
+      dispatch(addIngredient(ingredient));
+    }
+  });
+
+  const [isOrderDetailsOpened, setOrderDetailsState] = useState(false);
+
 
   const toggleOrderDetails = () => {
-    console.log("toggleOrderDetails is called", isOrderDetailsOpened);
     setOrderDetailsState(!isOrderDetailsOpened);
   };
 
@@ -44,7 +56,7 @@ const BurgerConstructor = () => {
           <OrderDetails/>
         </Modal>
       )}
-      <div className={style.container}>
+      <div className={style.container} ref={drop}>
         <div className="mt-25 mr-4 mb-10 ml-4">
           {isBunSelected() && (
             <BurgerConstructorItem

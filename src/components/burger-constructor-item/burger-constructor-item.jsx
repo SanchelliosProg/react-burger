@@ -7,7 +7,6 @@ import TYPES from '../../utils/ingredientTypes';
 import PropTypes from 'prop-types';
 import { useDispatch } from "react-redux";
 import { removeIngredient } from "../../services/reducers/constructor-ingredients";
-import { REMOVE_INGREDIENT } from "../../services/actions/constructor-ingredients"; 
 
 const BurgerConstructorItem = (props) => {
   const isWithPostfix = (props.type !== TYPES.bun) && (props.postfix !== undefined);
@@ -15,12 +14,7 @@ const BurgerConstructorItem = (props) => {
 
   const deleteElement = (event) => {
     event.preventDefault();
-    console.log("DELETING ELEMENT", props.item)
-    dispatch({
-      type: REMOVE_INGREDIENT,
-      id: props.item._id
-    })
-    //dispatch(removeIngredient(props.item));
+    dispatch(removeIngredient(props.item));
   }
 
   return (

@@ -5,12 +5,18 @@ import {
 import style from "./burger-item.module.css";
 import PropTypes from "prop-types";
 import { useDrag } from "react-dnd";
+import { useDispatch } from "react-redux";
+import { OPEN_INGREDIENT_DETAILS } from "../../services/actions/modal/modal";
+import { SELECT_ITEM } from "../../services/actions/modal/current-ingredient";
+
 
 const BurgerItem = (props) => {
-  const itemId = props.item._id;
+  const dispatch = useDispatch();
+  const id = props.item._id;
+
   const [, dragRef] = useDrag({
     type: "ingredient",
-    item: {itemId}
+    item: {id}
   });
 
   const counter = props.chosen.filter(
@@ -18,13 +24,19 @@ const BurgerItem = (props) => {
   ).length;
 
   const openModalWithCurrentItem = () => {
-    props.toggleModalState();
-    props.selectItem(props.item);
+    dispatch({
+      type: OPEN_INGREDIENT_DETAILS
+    });
+    dispatch({
+      type: SELECT_ITEM,
+      payload: props.item
+    });
   }
 
   return (
     <>
       <div
+        draggable
         ref={dragRef}
         className={`${style.container} ${props.rightPadding} clickable`}
         onClick={openModalWithCurrentItem}
@@ -53,8 +65,6 @@ BurgerItem.propTypes = {
   chosen: PropTypes.arrayOf(PropTypes.object).isRequired,
   item: PropTypes.object,
   rightPadding: PropTypes.string,
-  selectItem: PropTypes.func.isRequired, 
-  toggleModalState: PropTypes.func.isRequired,
 };
 
 export default BurgerItem;

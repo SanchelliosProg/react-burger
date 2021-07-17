@@ -7,8 +7,6 @@ const IngredientsSection = (props) => {
   const {chosen} = useSelector(store => ({
     chosen: store.constructorIngredients.chosen
   })); 
-
-  console.log('CHOSEN', chosen);
   
   return (
     <>
@@ -24,8 +22,6 @@ const IngredientsSection = (props) => {
               item={item}
               key={item._id}
               rightPadding={(index + 1) % 2 !== 0 ? "pr-6" : ""}
-              selectItem={props.selectItem} //PROPS DRILL
-              toggleModalState={props.toggleModalState} //PROPs DRILL
             />
           );
         })}
@@ -36,9 +32,7 @@ const IngredientsSection = (props) => {
 
 IngredientsSection.propTypes = {
   items: PropTypes.arrayOf(PropTypes.object).isRequired,
-  id: PropTypes.string,
-  selectItem: PropTypes.func.isRequired, 
-  toggleModalState: PropTypes.func.isRequired,
+  id: PropTypes.string, 
 }
 
 export default IngredientsSection;

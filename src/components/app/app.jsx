@@ -2,7 +2,6 @@ import AppHeader from "../app-header/app-header";
 import BurgerIngredients from "../burger-ingredients/burger-ingredients";
 import BurgerConstructor from "../burger-constructor/burger-constructor";
 import style from "./app.module.css";
-import chosen from "../../utils/chosen.js";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { getIngredients } from "../../services/reducers/ingredients";
@@ -25,7 +24,7 @@ const App = () => {
             <BurgerIngredients />
           </section>
           <section className={`pr-10`}>
-            <BurgerConstructor chosen={chosen} />
+            <BurgerConstructor/>
           </section>
         </DndProvider>
       </main>
