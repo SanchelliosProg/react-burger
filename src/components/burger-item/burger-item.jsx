@@ -8,9 +8,14 @@ import { useDrag } from "react-dnd";
 import { useDispatch } from "react-redux";
 import { OPEN_INGREDIENT_DETAILS } from "../../services/actions/modal/modal";
 import { SELECT_ITEM } from "../../services/actions/modal/current-ingredient";
+import { useSelector } from "react-redux";
 
 
 const BurgerItem = (props) => {
+  const {chosen} = useSelector(store => ({
+    chosen: store.constructorIngredients.chosen
+  })); 
+
   const dispatch = useDispatch();
   const id = props.item._id;
 
@@ -19,7 +24,7 @@ const BurgerItem = (props) => {
     item: {id}
   });
 
-  const counter = props.chosen.filter(
+  const counter = chosen.filter(
     (choice) => choice.name === props.item.name
   ).length;
 
@@ -62,7 +67,6 @@ const BurgerItem = (props) => {
 };
 
 BurgerItem.propTypes = {
-  chosen: PropTypes.arrayOf(PropTypes.object).isRequired,
   item: PropTypes.object,
   rightPadding: PropTypes.string,
 };

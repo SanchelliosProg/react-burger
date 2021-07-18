@@ -12,8 +12,6 @@ const initialState = {
 export const addIngredient = (ingredient) => {
   return function (dispatch) {
     if (ingredient.type === "bun") {
-
-      //cleanup bun if exists
       dispatch({
         type: REMOVE_BUN
       })

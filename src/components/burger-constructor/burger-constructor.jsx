@@ -4,34 +4,39 @@ import {
   CurrencyIcon,
   Button,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import { useState } from "react";
-import Modal  from "../modal/modal";
+import Modal from "../modal/modal";
 import OrderDetails from "../order-details/order-details";
 import { useSelector, useDispatch } from "react-redux";
 import { useDrop } from "react-dnd";
 import { addIngredient } from "../../services/reducers/constructor-ingredients";
+import { OPEN_ORDER_DETAILS } from "../../services/actions/modal/modal";
+import { makeOrder } from "../../services/reducers/order";
 
 const BurgerConstructor = () => {
-  const {chosen, ingredients} = useSelector(store => ({
-    chosen: store.constructorIngredients.chosen,
-    ingredients: store.ingredients.data
-  }));
+  const { chosen, ingredients, isModalOpened, currentView, orderSuccess } =
+    useSelector((store) => ({
+      chosen: store.constructorIngredients.chosen,
+      ingredients: store.ingredients.data,
+      isModalOpened: store.modal.isOpened,
+      currentView: store.modal.currentView,
+      orderSuccess: !store.order.error,
+    }));
 
   const dispatch = useDispatch();
 
   const [, drop] = useDrop({
     accept: "ingredient",
     drop(itemId) {
-      const ingredient = ingredients.find(item => item._id === itemId.id);
+      const ingredient = ingredients.find((item) => item._id === itemId.id);
       dispatch(addIngredient(ingredient));
-    }
+    },
   });
 
-  const [isOrderDetailsOpened, setOrderDetailsState] = useState(false);
-
-
-  const toggleOrderDetails = () => {
-    setOrderDetailsState(!isOrderDetailsOpened);
+  const openOrderDetails = () => {
+    dispatch(makeOrder(chosen));
+    dispatch({
+      type: OPEN_ORDER_DETAILS,
+    });
   };
 
   const bun = chosen.find((obj) => obj.type === "bun");
@@ -51,9 +56,9 @@ const BurgerConstructor = () => {
 
   return (
     <>
-      {isOrderDetailsOpened && (
-        <Modal onClose={toggleOrderDetails}>
-          <OrderDetails/>
+      {isModalOpened && currentView === "OrderDetails" && (
+        <Modal>
+          <OrderDetails />
         </Modal>
       )}
       <div className={style.container} ref={drop}>
@@ -101,7 +106,7 @@ const BurgerConstructor = () => {
             </span>
             <CurrencyIcon type="primary" />
           </div>
-          <Button type="primary" size="large" onClick={toggleOrderDetails}>
+          <Button type="primary" size="large" onClick={openOrderDetails}>
             Оформить заказ
           </Button>
         </div>

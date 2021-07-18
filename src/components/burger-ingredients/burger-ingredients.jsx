@@ -8,10 +8,10 @@ import IngredientDetails from "../ingredient-details/ingredient-details";
 import { useSelector } from "react-redux";
 
 const BurgerIngredients = () => {
-  
-  const {ingredients, isModalOpened} = useSelector((store) => ({
+  const { ingredients, isModalOpened, currentView } = useSelector((store) => ({
     ingredients: store.ingredients.data,
-    isModalOpened: store.modal.isOpened
+    isModalOpened: store.modal.isOpened,
+    currentView: store.modal.currentView,
   }));
 
   const [currentTab, setTab] = useState(type.bun);
@@ -34,9 +34,9 @@ const BurgerIngredients = () => {
 
   return (
     <>
-      {isModalOpened && (
+      {(isModalOpened && currentView === 'IngredientDetails') && (
         <Modal title="Детали ингредиента">
-          <IngredientDetails/>
+          <IngredientDetails />
         </Modal>
       )}
       <h1 className={`text text_type_main-large  pt-10 pb-5`}>
@@ -72,29 +72,22 @@ const BurgerIngredients = () => {
           items={getBunsFormData()}
           id={type.bun}
           title="Булки"
-          
-          
         />
         <IngredientsSection
           items={getSaucesFromData()}
           id={type.sauce}
           title="Соусы"
-          
-          
         />
         <IngredientsSection
           items={getMainFromData()}
           id={type.main}
           title="Начинка"
-          
         />
       </div>
     </>
   );
 };
 
-BurgerIngredients.propTypes = {
-  
-};
+BurgerIngredients.propTypes = {};
 
 export default BurgerIngredients;

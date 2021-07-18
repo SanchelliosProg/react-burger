@@ -8,7 +8,6 @@ const initialState = {
 
 export const getIngredients = () => {
   return function(dispatch) {
-    console.log("CALLS getIngredients")
     dispatch({type: LOAD_INGREDIENTS});
     fetch("https://norma.nomoreparties.space/api/ingredients", { method: "GET" })
       .then((resp) => {
