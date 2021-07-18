@@ -6,19 +6,40 @@ import type from "../../utils/ingredientTypes.js";
 import Modal from "../modal/modal";
 import IngredientDetails from "../ingredient-details/ingredient-details";
 import { useSelector } from "react-redux";
+import { useRef } from "react";
 
 const BurgerIngredients = () => {
+
+  const [currentTab, setTab] = useState(type.bun);
+
+  const scrollContainerRef = useRef(null);
+  const bunsRef = useRef(null);
+  const sauceRef = useRef(null);
+  const mainRef = useRef(null);
+  
   const { ingredients, isModalOpened, currentView } = useSelector((store) => ({
     ingredients: store.ingredients.data,
     isModalOpened: store.modal.isOpened,
     currentView: store.modal.currentView,
   }));
 
-  const [currentTab, setTab] = useState(type.bun);
+  const handleScroll = () => {
+    const scrollContainerPosition = scrollContainerRef.current.getBoundingClientRect()
+      .top;
+    const bunsPosition = bunsRef.current.getBoundingClientRect().top;
+    const saucePosition = sauceRef.current.getBoundingClientRect().top;
+    const mainPosition = mainRef.current.getBoundingClientRect().top;
+    
+    const mapOfValues = {
+      bun: Math.abs(scrollContainerPosition - bunsPosition),
+      sauce: Math.abs(scrollContainerPosition - saucePosition),
+      main: Math.abs(scrollContainerPosition - mainPosition)
+    };
 
-  const setCurrentTab = (tab) => {
-    setTab(tab);
-  };
+    const key = (Object.entries(mapOfValues).sort(([ ,v1], [ ,v2]) => v1 - v2))[0][0];
+    setTab(key); 
+  
+  }
 
   const getBunsFormData = () => {
     return ingredients.filter((item) => item.type === type.bun);
@@ -46,7 +67,6 @@ const BurgerIngredients = () => {
         <Tab
           value={type.bun}
           active={currentTab === type.bun}
-          onClick={setCurrentTab}
         >
           Булки
         </Tab>
@@ -54,7 +74,6 @@ const BurgerIngredients = () => {
         <Tab
           value={type.sauce}
           active={currentTab === type.sauce}
-          onClick={setCurrentTab}
         >
           Соусы
         </Tab>
@@ -62,26 +81,28 @@ const BurgerIngredients = () => {
         <Tab
           value={type.main}
           active={currentTab === type.main}
-          onClick={setCurrentTab}
         >
           Начинки
         </Tab>
       </div>
-      <div className={style.items}>
+      <div className={style.items} ref={scrollContainerRef} onScroll={handleScroll}>
         <IngredientsSection
           items={getBunsFormData()}
           id={type.bun}
           title="Булки"
+          ref={bunsRef}
         />
         <IngredientsSection
           items={getSaucesFromData()}
           id={type.sauce}
           title="Соусы"
+          ref={sauceRef}
         />
         <IngredientsSection
           items={getMainFromData()}
           id={type.main}
           title="Начинка"
+          ref={mainRef}
         />
       </div>
     </>

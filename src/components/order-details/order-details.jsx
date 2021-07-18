@@ -7,8 +7,6 @@ const OrderDetails = (props) => {
     orderData: store.order.data
   }));
 
-  console.log("SHIIIT", orderData);
-
   return (
     <>
       <span className={`${style.order} text text_type_digits-large mb-8`}>
