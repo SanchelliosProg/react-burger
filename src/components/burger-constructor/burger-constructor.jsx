@@ -13,7 +13,7 @@ import { OPEN_ORDER_DETAILS } from "../../services/actions/modal/modal";
 import { makeOrder } from "../../services/reducers/order";
 
 const BurgerConstructor = () => {
-  const { chosen, ingredients, isModalOpened, currentView, orderSuccess } =
+  const { chosen, ingredients, isModalOpened, currentView } =
     useSelector((store) => ({
       chosen: store.constructorIngredients.chosen,
       ingredients: store.ingredients.data,
