@@ -11,6 +11,7 @@ import { useDrop } from "react-dnd";
 import { addIngredient } from "../../services/reducers/constructor-ingredients";
 import { OPEN_ORDER_DETAILS } from "../../services/actions/modal/modal";
 import { makeOrder } from "../../services/reducers/order";
+import { INGREDIENT } from "../../utils/constants";
 
 const BurgerConstructor = () => {
   const { chosen, ingredients, isModalOpened, currentView } =
@@ -25,7 +26,7 @@ const BurgerConstructor = () => {
   const dispatch = useDispatch();
 
   const [, drop] = useDrop({
-    accept: "ingredient",
+    accept: INGREDIENT,
     drop(itemId) {
       const ingredient = ingredients.find((item) => item._id === itemId.id);
       dispatch(addIngredient(ingredient));
@@ -71,6 +72,7 @@ const BurgerConstructor = () => {
               price={bun.price}
               thumbnail={bun.image}
               postfix=" (верх)"
+              item={bun}
             />
           )}
           <div className={style.items}>
@@ -95,6 +97,7 @@ const BurgerConstructor = () => {
               price={bun.price}
               thumbnail={bun.image}
               postfix=" (низ)"
+              item={bun}
             />
           )}
         </div>

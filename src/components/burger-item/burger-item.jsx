@@ -9,6 +9,7 @@ import { useDispatch } from "react-redux";
 import { OPEN_INGREDIENT_DETAILS } from "../../services/actions/modal/modal";
 import { SELECT_ITEM } from "../../services/actions/modal/current-ingredient";
 import { useSelector } from "react-redux";
+import { INGREDIENT } from "../../utils/constants";
 
 
 const BurgerItem = (props) => {
@@ -20,7 +21,7 @@ const BurgerItem = (props) => {
   const id = props.item._id;
 
   const [, dragRef] = useDrag({
-    type: "ingredient",
+    type: INGREDIENT,
     item: {id}
   });
 
