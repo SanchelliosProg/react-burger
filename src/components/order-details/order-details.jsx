@@ -2,7 +2,7 @@ import style from "./order-details.module.css";
 import icon from "../../images/accepted.svg";
 import { useSelector } from "react-redux";
 
-const OrderDetails = (props) => {
+const OrderDetails = () => {
   const { orderData } = useSelector((store) => ({
     orderData: store.order.data,
   }));

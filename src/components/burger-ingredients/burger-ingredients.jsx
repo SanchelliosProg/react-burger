@@ -109,6 +109,4 @@ const BurgerIngredients = () => {
   );
 };
 
-BurgerIngredients.propTypes = {};
-
 export default BurgerIngredients;

@@ -9,8 +9,6 @@
   grid-column-start: 1;
 }
 
-.info {
-  display: grid;
-  align-self: stretch;
-  grid-column-start: 2;
+.info img + span {
+  flex-grow: 1;
 }

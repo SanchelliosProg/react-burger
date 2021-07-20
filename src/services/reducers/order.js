@@ -1,4 +1,4 @@
-import { MAKE_ORDER, ORDER_FAILED, ORDER_LOADED, SAVE_ORDER } from "../actions/order"
+import { ORDER_REQUEST, ORDER_ERROR, ORDER_SUCCESS, SAVE_ORDER } from "../actions/order"
 
 const initialState = {
   loading: false,
@@ -11,7 +11,7 @@ export const makeOrder = (chosen) => {
   
   return function(dispatch) {
     dispatch({
-      type: MAKE_ORDER
+      type: ORDER_REQUEST
     });
 
     fetch("https://norma.nomoreparties.space/api/orders", {
@@ -25,17 +25,17 @@ export const makeOrder = (chosen) => {
     })
       .then((resp) => {
         if (resp.ok) {
-          dispatch({type: ORDER_LOADED});
+          dispatch({type: ORDER_SUCCESS});
           return resp.json();
         } else {
-          dispatch({type: ORDER_FAILED});
+          dispatch({type: ORDER_ERROR});
           return Promise.reject(`Ошибка ${resp.status}`);
         }
       })
       .then((body) => {
         dispatch({type: SAVE_ORDER, payload: body});
       }).catch(e => {
-        dispatch({type: ORDER_FAILED});
+        dispatch({type: ORDER_ERROR});
         console.log('Error while fetching data: ', e);
       });
 
@@ -44,30 +44,30 @@ export const makeOrder = (chosen) => {
 
 export const orderReducer = (state = initialState, action) => {
   switch(action.type) {
-    case MAKE_ORDER: {
+    case ORDER_REQUEST: {
       return {
         ...state,
         loading: true,
         error: false
       }
     }
-    case ORDER_LOADED: {
+    case ORDER_SUCCESS: {
       return {
         ...state,
         loading: false
+      }
+    }
+    case ORDER_ERROR: {
+      return {
+        ...state,
+        loading: false,
+        error: true
       }
     }
     case SAVE_ORDER: {
       return {
         ...state,
         data: action.payload
-      }
-    }
-    case ORDER_FAILED: {
-      return {
-        ...state,
-        loading: false,
-        error: true
       }
     }
     default: {

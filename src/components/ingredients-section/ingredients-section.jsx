@@ -29,6 +29,7 @@ const IngredientsSection = forwardRef((props, ref) => {
 IngredientsSection.propTypes = {
   items: PropTypes.arrayOf(PropTypes.object).isRequired,
   id: PropTypes.string, 
+  title: PropTypes.string,
 }
 
 export default IngredientsSection;

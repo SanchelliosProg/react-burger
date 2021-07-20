@@ -83,8 +83,9 @@ const BurgerConstructorItem = (props) => {
         {!props.isLocked && <DragIcon type="primary" />}
       </div>
 
-      <div className="info">
+      <div>
         <ConstructorElement
+          className="info"
           type={props.type}
           isLocked={props.isLocked}
           text={`${props.text}${isWithPostfix ? props.postfix : ""}`}
