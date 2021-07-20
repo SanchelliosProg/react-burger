@@ -79,7 +79,7 @@ const BurgerConstructor = () => {
             {getIngredients().map((item, index) => {
               return (
                 <BurgerConstructorItem
-                  key={`${item._id}${index}`}
+                  key={item.listId}
                   text={item.name}
                   price={item.price}
                   thumbnail={item.image}

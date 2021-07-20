@@ -10,6 +10,7 @@
 }
 
 .info {
+  display: grid;
   align-self: stretch;
   grid-column-start: 2;
 }

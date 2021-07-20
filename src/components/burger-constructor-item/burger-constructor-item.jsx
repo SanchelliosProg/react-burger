@@ -10,14 +10,12 @@ import { removeIngredient } from "../../services/reducers/constructor-ingredient
 import { useDrag, useDrop } from "react-dnd";
 import { CHOSEN } from "../../utils/constants";
 import { useRef } from "react";
-import { replaceItems } from "../../services/reducers/constructor-ingredients"; 
+import { replaceItems } from "../../services/reducers/constructor-ingredients";
 import { useCallback } from "react";
 
 const BurgerConstructorItem = (props) => {
   const isWithPostfix = props.type !== TYPES.bun && props.postfix !== undefined;
   const dispatch = useDispatch();
-
-  console.log(props.item.listId);
 
   const deleteElement = (event) => {
     event.preventDefault();
@@ -25,11 +23,14 @@ const BurgerConstructorItem = (props) => {
   };
   const ref = useRef(null);
 
-  const handleDrop = useCallback((hoverIndex, dragIndex) => {
-    dispatch(replaceItems(hoverIndex, dragIndex));
-  });
+  const handleDrop = useCallback(
+    (hoverIndex, dragIndex) => {
+      dispatch(replaceItems(hoverIndex, dragIndex));
+    },
+    [dispatch]
+  );
 
-  const [{ handlerId }, drop] = useDrop({
+  const [, drop] = useDrop({
     accept: CHOSEN,
     collect(monitor) {
       return {
@@ -63,25 +64,22 @@ const BurgerConstructorItem = (props) => {
     },
   });
 
-  const [{isDragging}, drag] = useDrag({
+  const [, drag] = useDrag({
     type: CHOSEN,
     item: () => {
-      return {listId: props.item.listId};
+      return { listId: props.item.listId };
     },
-    collect: (monitor) => ({
-      isDragging: monitor.isDragging(),
-    })
   });
 
   drag(drop(ref));
 
   return (
     <div
-      draggable
       ref={ref}
+      
       className={`${style.item} mt-4 mb-4 ${props.isLocked ? "mr-5" : "mr-2"}`}
     >
-      <div className="drag">
+      <div className="drag clickable" draggable>
         {!props.isLocked && <DragIcon type="primary" />}
       </div>
 
