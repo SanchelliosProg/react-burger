@@ -8,13 +8,14 @@ import Modal from "../modal/modal";
 import OrderDetails from "../order-details/order-details";
 import { useSelector, useDispatch } from "react-redux";
 import { useDrop } from "react-dnd";
-import { addIngredient } from "../../services/actions/constructor-ingredients";
+import { addIngredient, CLEANUP_CHOSEN } from "../../services/actions/constructor-ingredients";
 import { OPEN_ORDER_DETAILS } from "../../services/actions/modal/modal";
 import { makeOrder } from "../../services/actions/order";
 import { INGREDIENT } from "../../utils/constants";
+import { CLEANUP_ORDER } from "../../services/actions/order";
 
 const BurgerConstructor = () => {
-  const { chosen, ingredients, isModalOpened, currentView } =
+  const { chosen, ingredients, isModalOpened, currentView, orderSuccess } =
     useSelector((store) => ({
       chosen: store.constructorIngredients.chosen,
       ingredients: store.ingredients.data,
@@ -38,6 +39,11 @@ const BurgerConstructor = () => {
     dispatch({
       type: OPEN_ORDER_DETAILS,
     });
+    if (orderSuccess) {
+      dispatch({
+        type: CLEANUP_CHOSEN
+      });
+    }
   };
 
   const bun = chosen.find((obj) => obj.type === "bun");

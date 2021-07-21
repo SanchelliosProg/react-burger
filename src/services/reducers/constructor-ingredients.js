@@ -2,7 +2,8 @@ import {
   ADD_INGREDIENT,
   REMOVE_INGREDIENT,
   REMOVE_BUN,
-  REPLACE_INGREDIENT
+  REPLACE_INGREDIENT,
+  CLEANUP_CHOSEN,
 } from "../actions/constructor-ingredients";
 import { nanoid } from "nanoid";
 
@@ -41,6 +42,9 @@ export const constructorIngredientsReducer = (state = initialState, action) => {
       updatedItems.splice(insertingIndex, 1);
       updatedItems.splice(hoveredIndex, 0, insertingItem);
       return {...state, chosen: updatedItems};
+    }
+    case CLEANUP_CHOSEN: {
+      return initialState;
     }
     default: {
       return state;

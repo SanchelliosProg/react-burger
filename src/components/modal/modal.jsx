@@ -5,6 +5,7 @@ import ModalOverlay from "../modal-overlay/modal-overlay";
 import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useDispatch } from "react-redux";
 import { SHUT_DOWN_MODAL } from "../../services/actions/modal/modal";
+import { CLEANUP_ORDER } from "../../services/actions/order";
 
 const modalRoot = document.getElementById("react-modals");
 
@@ -14,6 +15,9 @@ const Modal = (props) => {
   const shutDownModal = () => {
     dispatch({
       type: SHUT_DOWN_MODAL
+    });
+    dispatch({
+      type: CLEANUP_ORDER
     });
   }
 

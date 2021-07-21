@@ -2,6 +2,7 @@ export const ORDER_REQUEST = "ORDER_REQUEST";
 export const ORDER_SUCCESS = "ORDER_SUCCESS"; 
 export const ORDER_ERROR = "ORDER_FAILED";
 export const SAVE_ORDER = "SAVE_ORDER";
+export const CLEANUP_ORDER = "CLEANUP_ORDER";
 
 export const makeOrder = (chosen) => {
   const ids = chosen.map(item => item._id);

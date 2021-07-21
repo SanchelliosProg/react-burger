@@ -1,4 +1,4 @@
-import { ORDER_REQUEST, ORDER_ERROR, ORDER_SUCCESS, SAVE_ORDER } from "../actions/order"
+import { ORDER_REQUEST, ORDER_ERROR, ORDER_SUCCESS, SAVE_ORDER, CLEANUP_ORDER } from "../actions/order";
 
 const initialState = {
   loading: false,
@@ -33,6 +33,9 @@ export const orderReducer = (state = initialState, action) => {
         ...state,
         data: action.payload
       }
+    }
+    case CLEANUP_ORDER: {
+      return initialState;
     }
     default: {
       return state

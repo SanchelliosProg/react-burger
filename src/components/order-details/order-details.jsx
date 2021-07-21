@@ -1,5 +1,6 @@
 import style from "./order-details.module.css";
 import icon from "../../images/accepted.svg";
+import loader from "../../images/loader.svg";
 import { useSelector } from "react-redux";
 
 const OrderDetails = () => {
@@ -27,9 +28,10 @@ const OrderDetails = () => {
         </>
       ) : (
         <>
-          <span className="text text_type_main-default text_color_inactive mb-30">
-            Подождите...
+          <span className="text text_type_main-medium mb-15">
+            Загрузка
           </span>
+          <img src={loader} alt="всё готовится" className={`mb-30`} />
         </>
       )}
     </>
