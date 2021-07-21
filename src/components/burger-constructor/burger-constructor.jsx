@@ -8,9 +8,9 @@ import Modal from "../modal/modal";
 import OrderDetails from "../order-details/order-details";
 import { useSelector, useDispatch } from "react-redux";
 import { useDrop } from "react-dnd";
-import { addIngredient } from "../../services/reducers/constructor-ingredients";
+import { addIngredient } from "../../services/actions/constructor-ingredients";
 import { OPEN_ORDER_DETAILS } from "../../services/actions/modal/modal";
-import { makeOrder } from "../../services/reducers/order";
+import { makeOrder } from "../../services/actions/order";
 import { INGREDIENT } from "../../utils/constants";
 
 const BurgerConstructor = () => {

@@ -4,7 +4,7 @@ import BurgerConstructor from "../burger-constructor/burger-constructor";
 import style from "./app.module.css";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { getIngredients } from "../../services/reducers/ingredients";
+import { getIngredients } from "../../services/actions/ingredients";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 

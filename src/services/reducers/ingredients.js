@@ -6,28 +6,6 @@ const initialState = {
   data: []
 };
 
-export const getIngredients = () => {
-  return function(dispatch) {
-    dispatch({type: INGREDIENTS_REQUEST});
-    fetch("https://norma.nomoreparties.space/api/ingredients", { method: "GET" })
-      .then((resp) => {
-        if (resp.ok) {
-          dispatch({type: INGREDIENTS_SUCCESS});
-          return resp.json();
-        } else {
-          dispatch({type: INGREDIENTS_ERROR});
-          return Promise.reject(`Ошибка ${resp.status}`);
-        }
-      })
-      .then((body) => {
-        dispatch({type: SAVE_INGREDIENTS, payload: body.data});
-      }).catch(e => {
-        dispatch({type: INGREDIENTS_ERROR});
-        console.log('Error while fetching data: ', e);
-      });
-  }
-}
-
 export const ingredientsReducer = (state = initialState, action) => {
   switch (action.type) {
     case INGREDIENTS_REQUEST: {

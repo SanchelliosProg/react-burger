@@ -6,11 +6,11 @@ import style from "./burger-constructor-item.module.css";
 import TYPES from "../../utils/ingredientTypes";
 import PropTypes from "prop-types";
 import { useDispatch } from "react-redux";
-import { removeIngredient } from "../../services/reducers/constructor-ingredients";
+import { removeIngredient } from "../../services/actions/constructor-ingredients";
 import { useDrag, useDrop } from "react-dnd";
 import { CHOSEN } from "../../utils/constants";
 import { useRef } from "react";
-import { replaceItems } from "../../services/reducers/constructor-ingredients";
+import { replaceItems } from "../../services/actions/constructor-ingredients";
 import { useCallback } from "react";
 
 const BurgerConstructorItem = (props) => {
