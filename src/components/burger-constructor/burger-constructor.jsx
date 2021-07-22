@@ -4,29 +4,58 @@ import {
   CurrencyIcon,
   Button,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import PropTypes from "prop-types";
-import { useState } from "react";
-import Modal  from "../modal/modal";
+import Modal from "../modal/modal";
 import OrderDetails from "../order-details/order-details";
+import { useSelector, useDispatch } from "react-redux";
+import { useDrop } from "react-dnd";
+import { addIngredient, CLEANUP_CHOSEN } from "../../services/actions/constructor-ingredients";
+import { OPEN_ORDER_DETAILS } from "../../services/actions/modal/modal";
+import { makeOrder } from "../../services/actions/order";
+import { INGREDIENT } from "../../utils/constants";
+import { CLEANUP_ORDER } from "../../services/actions/order";
 
-const BurgerConstructor = (props) => {
-  const [isOrderDetailsOpened, setOrderDetailsState] = useState(false);
+const BurgerConstructor = () => {
+  const { chosen, ingredients, isModalOpened, currentView, orderSuccess } =
+    useSelector((store) => ({
+      chosen: store.constructorIngredients.chosen,
+      ingredients: store.ingredients.data,
+      isModalOpened: store.modal.isOpened,
+      currentView: store.modal.currentView,
+      orderSuccess: !store.order.error,
+    }));
 
-  const toggleOrderDetails = () => {
-    console.log("toggleOrderDetails is called", isOrderDetailsOpened);
-    setOrderDetailsState(!isOrderDetailsOpened);
+  const dispatch = useDispatch();
+
+  const [, drop] = useDrop({
+    accept: INGREDIENT,
+    drop(itemId) {
+      const ingredient = ingredients.find((item) => item._id === itemId.id);
+      dispatch(addIngredient(ingredient));
+    },
+  });
+
+  const openOrderDetails = () => {
+    dispatch(makeOrder(chosen));
+    dispatch({
+      type: OPEN_ORDER_DETAILS,
+    });
+    if (orderSuccess) {
+      dispatch({
+        type: CLEANUP_CHOSEN
+      });
+    }
   };
 
-  const bun = props.chosen.find((obj) => obj.type === "bun");
+  const bun = chosen.find((obj) => obj.type === "bun");
   const isBunSelected = () => {
     return bun !== undefined;
   };
 
-  const getIngredients = () => props.chosen.filter((obj) => obj.type !== "bun");
+  const getIngredients = () => chosen.filter((obj) => obj.type !== "bun");
 
   const getTotalPrice = () => {
     let totalPrice = 0;
-    props.chosen.forEach((item) => {
+    chosen.forEach((item) => {
       totalPrice += item.price;
     });
     return totalPrice;
@@ -34,12 +63,12 @@ const BurgerConstructor = (props) => {
 
   return (
     <>
-      {isOrderDetailsOpened && (
-        <Modal onClose={toggleOrderDetails}>
-          <OrderDetails/>
+      {isModalOpened && currentView === "OrderDetails" && (
+        <Modal>
+          <OrderDetails />
         </Modal>
       )}
-      <div className={style.container}>
+      <div className={style.container} ref={drop}>
         <div className="mt-25 mr-4 mb-10 ml-4">
           {isBunSelected() && (
             <BurgerConstructorItem
@@ -49,16 +78,18 @@ const BurgerConstructor = (props) => {
               price={bun.price}
               thumbnail={bun.image}
               postfix=" (верх)"
+              item={bun}
             />
           )}
           <div className={style.items}>
             {getIngredients().map((item, index) => {
               return (
                 <BurgerConstructorItem
-                  key={`${item._id}${index}`}
+                  key={item.listId}
                   text={item.name}
                   price={item.price}
                   thumbnail={item.image}
+                  item={item}
                 />
               );
             })}
@@ -72,6 +103,7 @@ const BurgerConstructor = (props) => {
               price={bun.price}
               thumbnail={bun.image}
               postfix=" (низ)"
+              item={bun}
             />
           )}
         </div>
@@ -83,17 +115,13 @@ const BurgerConstructor = (props) => {
             </span>
             <CurrencyIcon type="primary" />
           </div>
-          <Button type="primary" size="large" onClick={toggleOrderDetails}>
+          <Button type="primary" size="large" onClick={openOrderDetails}>
             Оформить заказ
           </Button>
         </div>
       </div>
     </>
   );
-};
-
-BurgerConstructor.propTypes = {
-  chosen: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 export default BurgerConstructor;

@@ -1,13 +1,13 @@
 import BurgerItem from "../burger-item/burger-item";
 import style from "./ingredients-section.module.css";
-import chosen from "../../utils/chosen.js";
 import PropTypes from 'prop-types';
+import { forwardRef } from "react";
 
-const IngredientsSection = (props) => {
+const IngredientsSection = forwardRef((props, ref) => {
   
   return (
     <>
-      <h2 id={props.id} className="text text_type_main-medium pb-6">
+      <h2 ref={ref} id={props.id} className="text text_type_main-medium pb-6">
         {props.title}
       </h2>
       <div className={`${style.container} pb-10 pl-4 pt-6`}>
@@ -15,25 +15,21 @@ const IngredientsSection = (props) => {
           
           return (
             <BurgerItem
-              chosen={chosen}
               item={item}
               key={item._id}
               rightPadding={(index + 1) % 2 !== 0 ? "pr-6" : ""}
-              selectItem={props.selectItem} //PROPS DRILL
-              toggleModalState={props.toggleModalState} //PROPs DRILL
             />
           );
         })}
       </div>
     </>
   );
-};
+});
 
 IngredientsSection.propTypes = {
   items: PropTypes.arrayOf(PropTypes.object).isRequired,
-  id: PropTypes.string,
-  selectItem: PropTypes.func.isRequired, 
-  toggleModalState: PropTypes.func.isRequired,
+  id: PropTypes.string, 
+  title: PropTypes.string,
 }
 
 export default IngredientsSection;

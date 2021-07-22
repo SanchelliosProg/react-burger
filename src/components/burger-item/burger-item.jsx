@@ -4,20 +4,46 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import style from "./burger-item.module.css";
 import PropTypes from "prop-types";
+import { useDrag } from "react-dnd";
+import { useDispatch } from "react-redux";
+import { OPEN_INGREDIENT_DETAILS } from "../../services/actions/modal/modal";
+import { SELECT_ITEM } from "../../services/actions/modal/current-ingredient";
+import { useSelector } from "react-redux";
+import { INGREDIENT } from "../../utils/constants";
+
 
 const BurgerItem = (props) => {
-  const counter = props.chosen.filter(
+  const {chosen} = useSelector(store => ({
+    chosen: store.constructorIngredients.chosen
+  })); 
+
+  const dispatch = useDispatch();
+  const id = props.item._id;
+
+  const [, dragRef] = useDrag({
+    type: INGREDIENT,
+    item: {id}
+  });
+
+  const counter = chosen.filter(
     (choice) => choice.name === props.item.name
   ).length;
 
   const openModalWithCurrentItem = () => {
-    props.toggleModalState();
-    props.selectItem(props.item);
+    dispatch({
+      type: OPEN_INGREDIENT_DETAILS
+    });
+    dispatch({
+      type: SELECT_ITEM,
+      payload: props.item
+    });
   }
 
   return (
     <>
       <div
+        draggable
+        ref={dragRef}
         className={`${style.container} ${props.rightPadding} clickable`}
         onClick={openModalWithCurrentItem}
       >
@@ -42,11 +68,8 @@ const BurgerItem = (props) => {
 };
 
 BurgerItem.propTypes = {
-  chosen: PropTypes.arrayOf(PropTypes.object).isRequired,
   item: PropTypes.object,
   rightPadding: PropTypes.string,
-  selectItem: PropTypes.func.isRequired, 
-  toggleModalState: PropTypes.func.isRequired,
 };
 
 export default BurgerItem;
